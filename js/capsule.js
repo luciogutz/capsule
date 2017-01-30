@@ -1,11 +1,11 @@
-import React form 'react'
+import React from 'react'
 import { Link } from 'react-router'
 
 export default React.createClass({
   render() {
     return (
       <section>
-        
+        { this.props.children }
       </section>
     )
   }
