@@ -2,6 +2,7 @@
   box-sizing: border-box;
 }
 
+/* All styles for landing page sign in*/
 .capsule {
   font-size: 82px;
   color: #03A9F4;
@@ -49,4 +50,101 @@
   color: white;
   background-color: #00A1F1;
   font-size: large;
+}
+
+/* End of landing page styles and sign in */
+
+/* Start of home page styles */
+.header {
+  height: 100px;
+  margin: 0;
+}
+
+.header__Title {
+  display: inline-block;
+  font-size: 70px;
+  margin-left: 40%;
+  margin-top: 0;
+  margin-bottom: 0;
+  vertical-align: middle;
+  line-height: 100px;
+  color: #03A9F4;
+}
+
+.header__UserName {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0;
+  vertical-align: bottom;
+  height: 50px;
+}
+
+.header__UserImage {
+  height: 50px;
+  border-radius: 100px;
+  vertical-align: middle;
+  margin-right: 3%;
+  margin-bottom: 11%;
+}
+
+.signOut {
+ z-index: -1;
+ margin-left: 39px;
+ border: none;
+ background-color: white;
+ color: #CDDC39;
+ font-size: 20px;
+}
+
+.header__Right {
+  float: right;
+  margin-right: 5%;
+  width: 20%;
+  height: 50px;
+  margin-top: 2%;
+}
+/* End of header elements including title */
+
+.newCapsule {
+  border: none;
+  background-color: white;
+  font-size: 25px;
+  margin-left: 2%;
+  line-height: 100px;
+  vertical-align: middle;
+  padding: 0;
+  display: block;
+}
+
+.newCapsuleForm {
+  height: 230px;
+  width: 300px;
+  border: solid #03A9F4 3px;
+  margin-left: 2%;
+}
+
+.inputs {
+  border-radius: 8px;
+  height: 40px;
+  width: 90%;
+  display: block;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.formSubmit {
+  background-color: #CDDC39;
+  border-radius: 8px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+  height: 50px;
+  width: 90%;
+  font-size: 20px;
 }

@@ -5,6 +5,14 @@ import { Link } from 'react-router'
 import { browserHistory } from 'react-router'
 
 export default React.createClass({
+  getInitialState() {
+    return {
+      provider: () => {},
+      currentName: "",
+      name: "",
+      picture: ""
+    }
+  },
   componentDidMount() {
    this.setState({provider: new firebase.auth.GoogleAuthProvider()});
 
@@ -12,41 +20,34 @@ export default React.createClass({
      if(user) {
        window.location = '#/home/' //After successful login, user will be redirected to home.
         }
+       var today = new Date()
        var currentUser = {};
-
-       currentUser["/home/" + user.uid] = {
+       currentUser["/users/" + user.uid] = {
          email: user.email,
          name: user.displayName,
          picture: user.photoURL
        }
 
-       //FIXME: Don't do this until we get data back from DB
        this.setState({
          currentName: user.email,
          name: user.displayName,
-         picture: user.photoURL
+         picture: user.photoURL,
+         lastLogin: today
        })
 
-    //  firebase.database().ref().update(currentUser)
-    //  firebase.database().ref("/users/" + user.uid).once("value").then((snapshot) => {
-    //    var snapshotReturn = snapshot.val()
-    //    this.setState({
-    //      currentName: snapshotReturn.email,
-    //      name: user.displayName,
-    //      picture: user.photoURL
-    //    })
-    //  })
+     firebase.database().ref().update(currentUser)
+     firebase.database().ref("/users/" + user.uid).once("value").then((snapshot) => {
+       var snapshotReturn = snapshot.val()
+       this.setState({
+         currentName: snapshotReturn.email,
+         name: user.displayName,
+         picture: user.photoURL,
+         lastLogin: snapshotReturn.lastLogin
+       })
+     })
+   })
+ },
 
-  })
- },
- getInitialState() {
-   return {
-     provider: () => {},
-     currentName: "Not Logged In",
-     name: "",
-     picture: ""
-   }
- },
 //  signUserOut() {
 //    firebase.auth().signOut().then(() => {
 //      this.setState({
@@ -79,13 +80,10 @@ export default React.createClass({
     return(
       <section className="welcome">
         <p>{this.state.currentName}</p>
-        <img className="nav__currentUserImage" src={this.state.picture} />
         <h1 className="capsule"> CAPSULE </h1>
         <h4 className="subTitle"> Dont let time get away from you. </h4>
         <p className="started"> Let's get started </p>
         <button onClick={this.signUserIn} className="googleSignIn"> Sign in with your Google Account </button>
-        <p>{this.state.currentName}</p>
-        <button className="googleSignIn" onClick={this.signUserOut}>Sign Out</button>
       </section>
     )
   }
