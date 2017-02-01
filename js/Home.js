@@ -2,13 +2,13 @@ import React from 'react'
 import {browserHistory} from 'react-router'
 
 export default React.createClass({
-  componentDidMount(){
-    currentUser["/users/" + user.uid] = {
-      email: user.email,
-      name: user.displayName,
-      picture: user.photoURL
-    }
-  },
+//   componentDidMount(){
+//     currentUser["/home/" + user.uid] = {
+//       email: user.email,
+//       name: user.displayName,
+//       picture: user.photoURL
+//     }
+//   },
   signUserOut() {
     firebase.auth().signOut().then(() => {
       this.setState({
@@ -16,9 +16,10 @@ export default React.createClass({
         picture: "",
         name: ""
       })
-      browserHistory.push('/')
+      window.location = '#/'
     })
   },
+
   render() {
     return(
       <section>

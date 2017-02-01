@@ -9,10 +9,12 @@ export default React.createClass({
    this.setState({provider: new firebase.auth.GoogleAuthProvider()});
 
    firebase.auth().onAuthStateChanged((user) => {
-
+     if(user) {
+       window.location = '#/home/' //After successful login, user will be redirected to home.
+        }
        var currentUser = {};
 
-       currentUser["/users/" + user.uid] = {
+       currentUser["/home/" + user.uid] = {
          email: user.email,
          name: user.displayName,
          picture: user.photoURL
@@ -25,15 +27,15 @@ export default React.createClass({
          picture: user.photoURL
        })
 
-//      firebase.database().ref().update(currentUser)
-//      firebase.database().ref("/users/" + user.uid).once("value").then((snapshot) => {
-//        var snapshotReturn = snapshot.val()
-     //   this.setState({
-     //     currentName: snapshotReturn.email,
-     //     name: user.displayName,
-     //     picture: user.photoURL
-     //   })
-     // })
+    //  firebase.database().ref().update(currentUser)
+    //  firebase.database().ref("/users/" + user.uid).once("value").then((snapshot) => {
+    //    var snapshotReturn = snapshot.val()
+    //    this.setState({
+    //      currentName: snapshotReturn.email,
+    //      name: user.displayName,
+    //      picture: user.photoURL
+    //    })
+    //  })
 
   })
  },
@@ -45,6 +47,17 @@ export default React.createClass({
      picture: ""
    }
  },
+//  signUserOut() {
+//    firebase.auth().signOut().then(() => {
+//      this.setState({
+//        currentName: "",
+//        picture: "",
+//        name: ""
+//      })
+//      // browserHistory.push('/')
+//    })
+// },
+
  signUserIn() {
    firebase.auth().signInWithRedirect(this.state.provider);
    firebase.auth().getRedirectResult().then((result) => {
@@ -60,7 +73,7 @@ export default React.createClass({
      console.log("ERROR authenticating with firebase: " + errorMessage);
      //FIXME: Better logging/error handling
    })
-   browserHistory.push("/")
+  //  browserHistory.push("/")
  },
   render() {
     return(
