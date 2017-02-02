@@ -29,31 +29,23 @@ export default React.createClass({
       capsuleName: currentCapsuleName
     })
   },
-  onCapsuleEventChange(e) {
-    var currentCapsuleEvent = e.target.value
+  onFormChange(e) {
+    var newCapsule = e.target.value
+    console.log(newCapsule)
     this.setState({
-      capsuleEvent: currentCapsuleEvent
-    })
-  },
-  onCapsuleDateChange(e) {
-    var currentCapsuleDate = e.target.value
-    this.setState({
-      capsuleDate: currentCapsuleDate
+      capsule: {
+        capsuleName: this.refs.capsuleName.value,
+        capsuleEvent: this.refs.capsuleEvent.value,
+        capsuleDate: this.refs.capsuleDate.value
+      }
     })
   },
 
   onNewCapsuleSubmit(e) {
     e.preventDefault()
-    var newCapsule = this.state.capsuleDate
-    this.refs.selectionArea.insertAdjacentHTML("afterbegin",` <section className="capsule__Unit">
-        <div className="div__Capsule--Top">
-            <i className="fa-mine-top fa-bars lines" aria-hidden="true"></i>
-        </div>
-        <div
-          className="div__Capsule--Bottom">
-          <i className="fa-mine-bottom fa-bars lines" aria-hidden="true"></i>
-        </div>
-      </section>` )
+    console.log(e);
+    var newCapsule = this.state.capsule
+    this.refs.capsuleArea.insertAdjacentHTML("afterbegin", `<h1>${this.capsuleName}</h1>`)
   },
 
   signUserOut() {
@@ -91,20 +83,29 @@ export default React.createClass({
             </div>
         </header>
           <button onClick={this.onCreateNewCapsule} className="newCapsule"> + new capsule </button>
-          <form ref="newCapsule" className="hidden">
+          <form onChange={this.onFormChange} ref="newCapsule" className="hidden">
             <input
-              onChange={this.onCapsuleFormChange}
+              ref="capsuleName"
               className="inputs"
               type="text"
               placeholder="Who is this capsule for?"/>
-            <input onChange={this.onCapsuleEventChange} className="inputs" type="text" placeholder="event" />
-            <input className="inputs" type="date"/>
-            <button onClick={this.fireBaseData} ref="newCapsuleInfo" className="formSubmit"> Submit </button>
+            <input
+              ref="capsuleEvent"
+              className="inputs"
+              type="text"
+              placeholder="event" />
+            <input
+              ref="capsuleDate"
+              className="inputs"
+              type="date"/>
+            <button
+              onClick={this.onNewCapsuleSubmit}
+              ref="newCapsuleInfo"
+              className="formSubmit">
+              Submit
+            </button>
           </form>
-          // <h2>{this.state.capsuleName}</h2>
-          // <h4>{this.state.capsuleEvent}</h4>
-          // <h4>{this.state.capsuleDate}</h4>
-          <section className="capsule__Unit">
+          <section ref="capsuleArea" className="capsule__Unit">
             <div className="div__Capsule--Top">
                 <i className="fa-mine-top fa-bars lines" aria-hidden="true"></i>
             </div>
