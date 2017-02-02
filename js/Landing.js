@@ -1,85 +1,66 @@
 import React from 'react'
-import ajax from 'jquery'
 import Reactfire from 'reactfire'
 import { Link } from 'react-router'
 import { browserHistory } from 'react-router'
 
 export default React.createClass({
-  getInitialState() {
+  getDefaultProps() {
     return {
-      provider: () => {},
-      currentName: "",
-      name: "",
-      picture: ""
+      user: { authed: false }
     }
   },
+
   componentDidMount() {
    this.setState({provider: new firebase.auth.GoogleAuthProvider()});
 
-   firebase.auth().onAuthStateChanged((user) => {
-     if(user) {
+   firebase.auth().onAuthStateChanged((authUser) => {
+     if(authUser) {
        window.location = '#/home/' //After successful login, user will be redirected to home.
-        }
+      }
        var today = new Date()
        var currentUser = {};
-       currentUser["/users/" + user.uid] = {
-         email: user.email,
-         name: user.displayName,
-         picture: user.photoURL
-       }
 
-       this.setState({
-         currentName: user.email,
-         name: user.displayName,
-         picture: user.photoURL,
-         lastLogin: today
-       })
+       currentUser["/users/" + authUser.uid] = {
+          name: authUser.displayName,
+          email: authUser.email,
+          picture: authUser.photoURL,
+          lastLogin: today
+        }
 
      firebase.database().ref().update(currentUser)
+
      firebase.database().ref("/users/" + user.uid).once("value").then((snapshot) => {
        var snapshotReturn = snapshot.val()
        this.setState({
-         currentName: snapshotReturn.email,
-         name: user.displayName,
-         picture: user.photoURL,
-         lastLogin: snapshotReturn.lastLogin
+         currentUser: {
+           authed: true,
+           email: snapshotReturn.email,
+           name: snapshotReturn.Name,
+           picture: snapshotreturn.picture,
+           lastLogin: snapshotReturn.lastLogin
+        }
        })
      })
    })
  },
-
-//  signUserOut() {
-//    firebase.auth().signOut().then(() => {
-//      this.setState({
-//        currentName: "",
-//        picture: "",
-//        name: ""
-//      })
-//      // browserHistory.push('/')
-//    })
-// },
-
- signUserIn() {
-   firebase.auth().signInWithRedirect(this.state.provider);
-   firebase.auth().getRedirectResult().then((result) => {
-     if(result.credential) {
-       var token = result.credential.accessToken;
-     }
-     var user = result.user;
-   }).catch((error) => {
-     var errorCode = error.code;
-     var errorMessage = error.message;
-     var email = error.email;
-     var credential = error.credential;
-     console.log("ERROR authenticating with firebase: " + errorMessage);
-     //FIXME: Better logging/error handling
-   })
-  //  browserHistory.push("/")
- },
+  signUserIn() {
+    firebase.auth().signInWithRedirect(this.state.provider);
+    firebase.auth().getRedirectResult().then((result) => {
+      if(result.credential) {
+        var token = result.credential.accessToken;
+      }
+    }).catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      var email = error.email;
+      var credential = error.credential;
+      console.log("ERROR authenticating with firebase: " + errorMessage);
+      //FIXME: Better logging/error handling
+    })
+  },
   render() {
     return(
       <section className="welcome">
-        <p>{this.state.currentName}</p>
         <h1 className="capsule"> CAPSULE </h1>
         <h4 className="subTitle"> Dont let time get away from you. </h4>
         <p className="started"> Let's get started </p>
