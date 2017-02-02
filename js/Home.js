@@ -26,37 +26,38 @@ export default React.createClass({
   },
   getInitialState() {
     return {
-      newCapsules: [{
-        name: "",
-        event: "",
-        date: ""
-     }]
+        capsuleName: "",
+        capsuleEvent: "",
+        capsuleDate: ""
     }
   },
   onCapsuleFormChange(e) {
     var newCapsuleInput = e.target.value
     this.setState({
-      newCapsule: newCapsuleInput
+      capsuleName: newCapsuleInput.capsuleName,
+      capsuleEvent: newCapsuleInput.capsuleEvent,
+      capsuleDate: newCapsuleInput.capsuleDate
     })
+    console.log(capsuleName)
   },
 
   onNewCapsuleSubmit(e) {
     e.preventDefault()
-    var currentNewCapsule = this.state.newCapsule
-    console.log(currentNewCapsule)
+    var currentNewCapsule = this.state.newCapsuleInput
+    console.log(currentNewCapsule);
   },
   render() {
     return(
       <section>
+          <img className="header__Image" src="http://www.theldsfamilyfellowship.org/wp-content/uploads/2016/06/9807-family-bg.jpg" />
+          <h1 className="header__Title"> Capsule </h1>
         <header className="header">
-
             <div className="header__Right">
               <img className="header__UserImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShk3fQJKc47O7qWr-YT41FJzAiUhKMaTXmLBeWdeybwG6a6VslVQ" />
               <p className="header__UserName"> User name </p>
               <button className="signOut" onClick={this.signUserOut}> Sign Out </button>
             </div>
         </header>
-        <h1 className="header__Title"> Capsule </h1>
           <button onClick={this.onCreateNewCapsule} className="newCapsule"> + new capsule </button>
           <form onChange={this.onCapsuleFormChange} ref="newCapsule" className="hidden">
             <input className="inputs" type="text" placeholder="Who is this capsule for?"/>
@@ -64,22 +65,16 @@ export default React.createClass({
             <input className="inputs" type="date"/>
             <button onClick={this.onNewCapsuleSubmit} ref="newCapsuleInfo" className="formSubmit"> Submit </button>
           </form>
+          <section className="capsule__Unit">
+              <div className="div__Capsule--Top">
+                  <i className="fa-mine-top fa-bars lines" aria-hidden="true"></i>
+              </div>
+              <div
+                className="div__Capsule--Bottom">
+                <i className="fa-mine-bottom fa-bars lines" aria-hidden="true"></i>
+              </div>
           </section>
-          // <div>
-          //   {
-          //       this.state.newCapsule.map((capsule, i)=>{
-          //         return (
-          //           <section key={i}>
-          //           <h2>{capsule.name}</h2>
-          //           <h4>{capsule.event}</h4>
-          //           <h4>{capsule.date}</h4>
-          //           </section>
-          //         )
-          //       })
-          //     }
-          // </div>
-
-
+          </section>
     )
   }
 })

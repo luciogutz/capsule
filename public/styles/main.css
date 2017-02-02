@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box;
 }
+ body {
+   margin: 0;
+ }
 
 /* All styles for landing page sign in*/
 .capsule {
@@ -60,11 +63,15 @@
   margin: 0;
 }
 
+.header__Div {
+
+}
+
 .header__Title {
   display: inline-block;
-  font-size: 70px;
-  margin-left: 40%;
-  margin-top: 0;
+  font-size: 100px;
+  margin-left: 37%;
+  margin-top: -1000px;
   margin-bottom: 0;
   vertical-align: middle;
   line-height: 100px;
@@ -85,6 +92,14 @@
   vertical-align: middle;
   margin-right: 3%;
   margin-bottom: 11%;
+  position: absolute;
+}
+
+.header__Image {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: -1;
 }
 
 .signOut {
@@ -147,4 +162,60 @@
   height: 50px;
   width: 90%;
   font-size: 20px;
+}
+
+/* capsule design elements */
+
+.capsule__Unit {
+  text-align: center;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.div__Capsule--Top {
+  border: solid black 3px;
+  height: 100px;
+  width: 100px;
+  border-radius: 50px 50px 0px 0px;
+  margin: 0 auto;
+  z-index: -1;
+}
+
+.div__Capsule--Bottom {
+  border: solid black 3px;
+  height: 100px;
+  width: 100px;
+  border-radius: 0px 0px 50px 50px;
+  margin: 0 auto;
+  z-index: -1;
+}
+
+.div__Capsule--CrossBar {
+  height: 20px;
+  width: 100px;
+  border: solid black 2px;
+  margin-top: 46px;
+}
+
+.lines {
+  margin-top: 20%;
+}
+
+.fa-mine-top {
+  display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 40px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    margin-top: 40%;
+}
+
+.fa-mine-bottom {
+  display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 40px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    margin-bottom: 40%;
 }
