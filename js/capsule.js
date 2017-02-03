@@ -4,7 +4,7 @@ import Landing from  './Landing'
 
 
 export default React.createClass({
-  
+
   getInitialState() {
     return {
       provider: () => {},
@@ -22,7 +22,7 @@ export default React.createClass({
 
    firebase.auth().onAuthStateChanged((authUser) => {
      if(authUser) {
-       window.location = '#/home/' //After successful login, user will be redirected to home.
+       window.location = `#/home/${authUser.uid}` //After successful login, user will be redirected to home.
       }
        var today = new Date()
        var currentUser = {};
@@ -66,10 +66,25 @@ export default React.createClass({
    })
   //  browserHistory.push("/")
  },
+ signUserOut() {
+   firebase.auth().signOut().then(() => {
+     this.setState({
+       user: {
+         authed: false,
+         name: '',
+         email: '',
+         picture: '',
+         lastLogin: undefined
+       }
+     })
+     window.location = '#/'
+   })
+ },
   render() {
     return (
       <section>
-        { this.props.children }
+        {React.cloneElement(this.props.children, { signUserInFunc: this.signUserIn,
+        signUserOutFunc: this.signUserOut})}
       </section>
     )
   }

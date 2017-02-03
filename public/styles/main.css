@@ -132,10 +132,11 @@
 }
 
 .newCapsuleForm {
-  height: 230px;
+  height: 300px;
   width: 300px;
   border: solid #03A9F4 3px;
   margin-left: 2%;
+  position: relative;
 }
 
 .inputs {
@@ -183,12 +184,15 @@
   border: solid grey 2px;
   margin-left: auto;
   margin-right: auto;
+  z-index: -1;
 }
 
 .capsule__Unit {
+  float: left;
   text-align: center;
   width: 30%;
-  margin-left: auto;
+  margin-bottom: 8%;
+  margin-left: 2%;
   margin-right: auto;
 }
 

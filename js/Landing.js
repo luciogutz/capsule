@@ -64,7 +64,7 @@ export default React.createClass({
         <h1 className="capsule"> CAPSULE </h1>
         <h4 className="subTitle"> Dont let time get away from you. </h4>
         <p className="started"> Let's get started </p>
-        <button onClick={this.signUserIn} className="googleSignIn"> Sign in with your Google Account </button>
+        <button onClick={this.props.signUserInFunc} className="googleSignIn"> Sign in with your Google Account </button>
       </section>
     )
   }

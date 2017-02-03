@@ -10,7 +10,7 @@ render(
     <Router history={ hashHistory }>
       <Route component={ Capsule }>
         <Route path="/" component={ Landing }/>
-        <Route path="/home/" component={ Home }/>
+        <Route path="/home/:userID" component={ Home }/>
       </Route>
     </Router>
   ),

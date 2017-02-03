@@ -14,61 +14,80 @@ export default React.createClass({
   },
   getInitialState() {
     return {
-        capsuleName: "",
-        capsuleEvent: "",
-        capsuleDate: "",
-        capsules: []
-    }
-  },
+        userName: "",
+        userEmail: "",
+        userPicture: "",
+        capsuleData: {
+          capsuleName: "",
+          capsuleEvent: "",
+          capsuleDate: ""
+        }
+      }
+    },
   onNameChange(e) {
+    var currentCapsuleName = e.target.value
     this.setState({
-        capsuleName: e.target.value
+      capsuleData: {
+        capsuleName: currentCapsuleName
+      }
     })
   },
   onEventChange(e) {
+    var currentCapsuleEvent = e.target.value
     this.setState({
-      capsuleEvent: e.target.value
+      capsuleData: {
+        capsuleEvent: currentCapsuleEvent
+      }
     })
   },
   onDateChange(e) {
+    var currentCapsuleDate = e.target.value
     this.setState({
-      capsuleDate: e.target.value
+      capsuleData: {
+        capsuleDate: currentCapsuleDate
+      }
     })
   },
-
   onNewCapsuleSubmit(e) {
     e.preventDefault()
     console.log(e);
     this.refs.newCapsule.className = "hidden"
-    var newCapsuleName = this.state.capsuleName
-    var newCapsuleEvent = this.state.capsuleEvent
-    var newCapsuleDate = this.state.capsuleDate
+    this.refs.capsuleName.value = ""
+    this.refs.capsuleEvent.value = ""
+    this.refs.capsuleDate.value = ""
+    var newCapsuleName = this.state.capsuleData.capsuleName
+    var newCapsuleEvent = this.state.capsuleData.capsuleEvent
+    var newCapsuleDate = this.state.capsuleData.capsuleDate
     this.refs.capsuleArea.insertAdjacentHTML("beforebegin", `<section class="capsule__Unit"><h2 class="newCapTitle" >${newCapsuleName}</h2><h3 class="newCapEvent">${newCapsuleEvent}</h3><h3 class="newCapDate">${newCapsuleDate}</h3><div class="div__Capsule--Top"><i class="fa-mine-top fa-bars lines" aria-hidden="true"></i></div><div class="div__Capsule--Bottom">
     <i class="fa-mine-bottom fa-bars lines" aria-hidden="true"></i></div></section>`)
+    this.updateUsersCapsuleData()
   },
 
-  signUserOut() {
-    firebase.auth().signOut().then(() => {
+  // sending data to firebase
+  updateUsersCapsuleData() {
+    var capsuleUserDatabase = {}
+    var userInfo = this.state.capsuleData
+    capsuleUserDatabase["/users/" + this.props.params.userID + "/capsules/"] = {
+      userInfo
+    }
+    firebase.database().ref().update(capsuleUserDatabase)
+  },
+  onCancelSubmit(e) {
+    this.refs.newCapsule.className = "hidden"
+  },
+  componentWillMount() {
+    firebase.database().ref("/users/" + this.props.params.userID).once("value").then((snapshot) => {
+      const capsuleUser = snapshot.val()
+      var updatedUserName = capsuleUser.name
+      var updatedUserEmail = capsuleUser.email
+      var updatedUserPicture = capsuleUser.picture
       this.setState({
-        user: {
-          authed: false,
-          name: '',
-          email: '',
-          picture: '',
-          lastLogin: undefined
-        }
+        userName: updatedUserName,
+        userEmail: updatedUserEmail,
+        userPicture: updatedUserPicture
       })
-      window.location = '#/'
     })
   },
-  // componentWillMount() {
-  //   firebase.database().ref("/leagueData/champions").once("value").then((snapshot) => {
-  //     const champListDB = snapshot.val().lolData
-  //     this.setState({
-  //       champList: champListDB
-  //     })
-  //   })
-  // },
   render() {
     return(
       <section>
@@ -76,9 +95,9 @@ export default React.createClass({
           <h1 className="header__Title"> Capsule </h1>
         <header className="header">
             <div className="header__Right">
-              <img className="header__UserImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShk3fQJKc47O7qWr-YT41FJzAiUhKMaTXmLBeWdeybwG6a6VslVQ" />
-              <p className="header__UserName"> {this.props.user.email} </p>
-              <button className="signOut" onClick={this.signUserOut}> Sign Out </button>
+              <img className="header__UserImage" src={this.state.userPicture}/>
+              <p className="header__UserName"> {this.state.userName} </p>
+              <button className="signOut" onClick={this.props.signUserOutFunc}> Sign Out </button>
             </div>
         </header>
           <button onClick={this.onCreateNewCapsule} className="newCapsule"> + new capsule </button>
@@ -106,11 +125,24 @@ export default React.createClass({
               className="formSubmit">
               Submit
             </button>
+            <button
+              onClick={this.onCancelSubmit}
+              className="formSubmit">
+              Cancel
+            </button>
           </form>
           <section className="newCapsules__Container">
             <section ref="capsuleArea" className="capsule__Unit">
-              <h2 className="newCapTitle" > Lucio's capsule </h2><h3 className="newCapEvent">  football games</h3><h3 className="newCapDate">04/05/2017</h3><div className="div__Capsule--Top"><i className="fa-mine-top fa-bars lines" aria-hidden="true"></i></div><div className="div__Capsule--Bottom">
-              <i className="fa-mine-bottom fa-bars lines" aria-hidden="true"></i></div>
+              <h2 className="newCapTitle" > Lucio's capsule </h2>
+              <h3 className="newCapEvent">  football games</h3>
+              <h3 className="newCapDate">04/05/2017</h3>
+              <div className="div__Capsule--Top">
+                <i className="fa-mine-top fa-bars lines" aria-hidden="true"></i>
+                </div>
+              <div className="div__Capsule--Bottom">
+                <i className="fa-mine-bottom fa-bars lines" aria-hidden="true">
+              </i>
+              </div>
             </section>
           </section>
       </section>
