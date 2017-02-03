@@ -165,6 +165,25 @@
 }
 
 /* capsule design elements */
+.newCapTitle {
+  font-size: 28px;
+  margin: 1%;
+}
+
+.newCapEvent {
+  margin: 1%;
+}
+
+.newCapDate {
+  margin: 1%;
+}
+
+.newCapsules__Container {
+  width: 80%;
+  border: solid grey 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .capsule__Unit {
   text-align: center;

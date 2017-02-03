@@ -14,38 +14,37 @@ export default React.createClass({
   },
   getInitialState() {
     return {
-      Capsule:
-      {
         capsuleName: "",
         capsuleEvent: "",
         capsuleDate: "",
         capsules: []
-      }
     }
   },
-  onCapsuleNameChange(e) {
-    var currentCapsuleName = e.target.value
+  onNameChange(e) {
     this.setState({
-      capsuleName: currentCapsuleName
+        capsuleName: e.target.value
     })
   },
-  onFormChange(e) {
-    var newCapsule = e.target.value
-    console.log(newCapsule)
+  onEventChange(e) {
     this.setState({
-      capsule: {
-        capsuleName: this.refs.capsuleName.value,
-        capsuleEvent: this.refs.capsuleEvent.value,
-        capsuleDate: this.refs.capsuleDate.value
-      }
+      capsuleEvent: e.target.value
+    })
+  },
+  onDateChange(e) {
+    this.setState({
+      capsuleDate: e.target.value
     })
   },
 
   onNewCapsuleSubmit(e) {
     e.preventDefault()
     console.log(e);
-    var newCapsule = this.state.capsule
-    this.refs.capsuleArea.insertAdjacentHTML("afterbegin", `<h1>${this.capsuleName}</h1>`)
+    this.refs.newCapsule.className = "hidden"
+    var newCapsuleName = this.state.capsuleName
+    var newCapsuleEvent = this.state.capsuleEvent
+    var newCapsuleDate = this.state.capsuleDate
+    this.refs.capsuleArea.insertAdjacentHTML("beforebegin", `<section class="capsule__Unit"><h2 class="newCapTitle" >${newCapsuleName}</h2><h3 class="newCapEvent">${newCapsuleEvent}</h3><h3 class="newCapDate">${newCapsuleDate}</h3><div class="div__Capsule--Top"><i class="fa-mine-top fa-bars lines" aria-hidden="true"></i></div><div class="div__Capsule--Bottom">
+    <i class="fa-mine-bottom fa-bars lines" aria-hidden="true"></i></div></section>`)
   },
 
   signUserOut() {
@@ -83,18 +82,21 @@ export default React.createClass({
             </div>
         </header>
           <button onClick={this.onCreateNewCapsule} className="newCapsule"> + new capsule </button>
-          <form onChange={this.onFormChange} ref="newCapsule" className="hidden">
+          <form ref="newCapsule" className="hidden">
             <input
+              onChange={this.onNameChange}
               ref="capsuleName"
               className="inputs"
               type="text"
               placeholder="Who is this capsule for?"/>
             <input
+              onChange={this.onEventChange}
               ref="capsuleEvent"
               className="inputs"
               type="text"
               placeholder="event" />
             <input
+              onChange={this.onDateChange}
               ref="capsuleDate"
               className="inputs"
               type="date"/>
@@ -105,16 +107,13 @@ export default React.createClass({
               Submit
             </button>
           </form>
-          <section ref="capsuleArea" className="capsule__Unit">
-            <div className="div__Capsule--Top">
-                <i className="fa-mine-top fa-bars lines" aria-hidden="true"></i>
-            </div>
-            <div
-              className="div__Capsule--Bottom">
-              <i className="fa-mine-bottom fa-bars lines" aria-hidden="true"></i>
-            </div>
+          <section className="newCapsules__Container">
+            <section ref="capsuleArea" className="capsule__Unit">
+              <h2 className="newCapTitle" > Lucio's capsule </h2><h3 className="newCapEvent">  football games</h3><h3 className="newCapDate">04/05/2017</h3><div className="div__Capsule--Top"><i className="fa-mine-top fa-bars lines" aria-hidden="true"></i></div><div className="div__Capsule--Bottom">
+              <i className="fa-mine-bottom fa-bars lines" aria-hidden="true"></i></div>
+            </section>
           </section>
-          </section>
+      </section>
     )
   }
 })
