@@ -10,9 +10,10 @@ export default React.createClass({
     }
   },
   getCamera() {
+    this.refs.cameraContainer.className = "cameraScreen"
     var video = this.refs.video
-    var canvas = this.refs.canvas
-    var context = canvas.getContext('2d')
+    var photo = this.refs.photo
+    // var context = canvas.getContext('2d')
 
     navigator.getMedia = navigator.getUserMedia ||
                          navigator.webkitGetUserMedia ||
@@ -29,11 +30,14 @@ export default React.createClass({
     function throwError (e) {
       alert(e.name)
     }
-    function snap (){
-      canvas.width = video.clientWidth
-      canvas.height = video.clientHeight
-      context.drawImage(video, 0, 0)
-    }
+  },
+  onPhotoSnap (){
+    var video = this.refs.video
+    var photo = this.refs.photo
+    var canvas = this.refs.canvas
+    var context = canvas.getContext('2d')
+    context.drawImage(video, 0, 0,)
+    photo.setAttribute('src', canvas.toDataURL("image/png"))
   },
   onCreateNewCapsule(){
     this.refs.newCapsule.className = "newCapsuleForm"
@@ -150,9 +154,12 @@ export default React.createClass({
             </button>
           </form>
           <button onClick={this.getCamera}>Take a Picture</button>
-          <video ref="video" className="video"></video>
-          <canvas ref="canvas"></canvas>
-          <button onClick={this.snap}>Snap</button>
+          <div ref="cameraContainer" className="hidden">
+            <video ref="video" className="video"></video>
+            <canvas className="canvas" ref="canvas"></canvas>
+            <img className="photoSnap" ref="photo"/>
+            <button onClick={this.onPhotoSnap}>Snap</button>
+          </div>
           <section ref="capsuleArea" className="newCapsules__Container">
             {
               Object.keys(this.state.capsuleData).map((i, capsule) => {
