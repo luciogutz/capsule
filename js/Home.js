@@ -36,7 +36,11 @@ export default React.createClass({
     var photo = this.refs.photo
     var canvas = this.refs.canvas
     var context = canvas.getContext('2d')
-    context.drawImage(video, 0, 0,)
+    console.log("Visafasd w: " + video.videoWidth)
+    console.log("Canvas w: " + canvas.width)
+    console.log('photo w: ' + photo.width)
+
+    context.drawImage(video, 0, 0)
     photo.setAttribute('src', canvas.toDataURL("image/png"))
   },
   onCreateNewCapsule(){
@@ -155,8 +159,8 @@ export default React.createClass({
           </form>
           <button onClick={this.getCamera}>Take a Picture</button>
           <div ref="cameraContainer" className="hidden">
-            <video ref="video" className="video"></video>
-            <canvas className="canvas" ref="canvas"></canvas>
+            <video ref="video" className="video" width="600" height="475"></video>
+            <canvas className="canvas" ref="canvas" width="600" height="475"></canvas>
             <img className="photoSnap" ref="photo"/>
             <button onClick={this.onPhotoSnap}>Snap</button>
           </div>
