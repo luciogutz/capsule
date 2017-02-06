@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import Landing from  './Landing'
-
+import Footer from './Footer'
 
 export default React.createClass({
 
@@ -85,6 +85,7 @@ export default React.createClass({
       <section>
         {React.cloneElement(this.props.children, { signUserInFunc: this.signUserIn,
         signUserOutFunc: this.signUserOut})}
+      <Footer />  
       </section>
     )
   }

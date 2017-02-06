@@ -9,113 +9,131 @@ export default React.createClass({
       user: { authed: false }
     }
   },
+  getCamera() {
+    var video = this.refs.video
+    var canvas = this.refs.canvas
+    var context = canvas.getContext('2d')
+
+    navigator.getMedia = navigator.getUserMedia ||
+                         navigator.webkitGetUserMedia ||
+                         navigator.mozGetUserMedia ||
+                         navigator.msGetUserMedia ||
+                         navigator.oGetUserMedia
+    if(navigator.getUserMedia){
+      navigator.getUserMedia({video: true}, streamWebCam, throwError)
+    }
+    function streamWebCam (stream){
+      video.src = window.URL.createObjectURL(stream)
+      video.play()
+    }
+    function throwError (e) {
+      alert(e.name)
+    }
+    function snap (){
+      canvas.width = video.clientWidth
+      canvas.height = video.clientHeight
+      context.drawImage(video, 0, 0)
+    }
+  },
   onCreateNewCapsule(){
     this.refs.newCapsule.className = "newCapsuleForm"
   },
   getInitialState() {
+    var d = new Date()
+    const currentDate = d.toDateString()
+    let id = Date.now()
     return {
         userName: "",
         userEmail: "",
         userPicture: "",
         capsuleData: {
-          capsuleName: "",
-          capsuleEvent: "",
-          capsuleDate: ""
+          0:{
+              capsuleName: "",
+              capsuleEvent: "",
+              capsuleDate: "",
+              capsuleID: "",
+              capsuleUID: id
+            },
+
         }
       }
     },
-  onNameChange(e) {
-    var currentCapsuleName = e.target.value
+  onFormChange() {
+    var UID = this.state.capsuleData[0].capsuleUID;
+
     this.setState({
       capsuleData: {
-        capsuleName: currentCapsuleName
-      }
-    })
-  },
-  onEventChange(e) {
-    var currentCapsuleEvent = e.target.value
-    this.setState({
-      capsuleData: {
-        capsuleEvent: currentCapsuleEvent
-      }
-    })
-  },
-  onDateChange(e) {
-    var currentCapsuleDate = e.target.value
-    this.setState({
-      capsuleData: {
-        capsuleDate: currentCapsuleDate
+        0: {
+          capsuleName: this.refs.capsuleName.value,
+          capsuleEvent: this.refs.capsuleEvent.value,
+          capsuleDate: this.refs.capsuleDate.value,
+          caspuleID: this.props.params.userID,
+          capsuleUID: UID
+        }
       }
     })
   },
   onNewCapsuleSubmit(e) {
     e.preventDefault()
-    console.log(e);
+    // sending data to firebase
+    var capsuleUserDatabase = {}
+    var capsule = this.state.capsuleData
+    capsuleUserDatabase["/capsules/" + this.state.capsuleData[0].capsuleUID] = {
+      capsule
+    }
+    firebase.database().ref().update(capsuleUserDatabase)
     this.refs.newCapsule.className = "hidden"
     this.refs.capsuleName.value = ""
     this.refs.capsuleEvent.value = ""
     this.refs.capsuleDate.value = ""
-    var newCapsuleName = this.state.capsuleData.capsuleName
-    var newCapsuleEvent = this.state.capsuleData.capsuleEvent
-    var newCapsuleDate = this.state.capsuleData.capsuleDate
-    this.refs.capsuleArea.insertAdjacentHTML("beforebegin", `<section class="capsule__Unit"><h2 class="newCapTitle" >${newCapsuleName}</h2><h3 class="newCapEvent">${newCapsuleEvent}</h3><h3 class="newCapDate">${newCapsuleDate}</h3><div class="div__Capsule--Top"><i class="fa-mine-top fa-bars lines" aria-hidden="true"></i></div><div class="div__Capsule--Bottom">
-    <i class="fa-mine-bottom fa-bars lines" aria-hidden="true"></i></div></section>`)
-    this.updateUsersCapsuleData()
   },
 
-  // sending data to firebase
-  updateUsersCapsuleData() {
-    var capsuleUserDatabase = {}
-    var userInfo = this.state.capsuleData
-    capsuleUserDatabase["/users/" + this.props.params.userID + "/capsules/"] = {
-      userInfo
-    }
-    firebase.database().ref().update(capsuleUserDatabase)
-  },
   onCancelSubmit(e) {
-    this.refs.newCapsule.className = "hidden"
-  },
+      this.refs.newCapsule.className = "hidden"
+    },
   componentWillMount() {
     firebase.database().ref("/users/" + this.props.params.userID).once("value").then((snapshot) => {
       const capsuleUser = snapshot.val()
       var updatedUserName = capsuleUser.name
       var updatedUserEmail = capsuleUser.email
       var updatedUserPicture = capsuleUser.picture
+      var capsules = capsuleUser.capsules.userInfo
       this.setState({
         userName: updatedUserName,
         userEmail: updatedUserEmail,
-        userPicture: updatedUserPicture
+        userPicture: updatedUserPicture,
+        capsuleData: capsules
       })
     })
   },
   render() {
+
     return(
       <section>
-          <img className="header__Image" src="http://www.theldsfamilyfellowship.org/wp-content/uploads/2016/06/9807-family-bg.jpg" />
+        <div>
           <h1 className="header__Title"> Capsule </h1>
-        <header className="header">
-            <div className="header__Right">
-              <img className="header__UserImage" src={this.state.userPicture}/>
-              <p className="header__UserName"> {this.state.userName} </p>
-              <button className="signOut" onClick={this.props.signUserOutFunc}> Sign Out </button>
-            </div>
-        </header>
+          <img className="header__Image" src="http://www.theldsfamilyfellowship.org/wp-content/uploads/2016/06/9807-family-bg.jpg" />
+          <header className="header">
+              <div className="header__Right">
+                <img className="header__UserImage" src={this.state.userPicture}/>
+                <p className="header__UserName"> {this.state.userName} </p>
+                <button className="signOut" onClick={this.props.signUserOutFunc}> Sign Out </button>
+              </div>
+          </header>
+        </div>
           <button onClick={this.onCreateNewCapsule} className="newCapsule"> + new capsule </button>
-          <form ref="newCapsule" className="hidden">
+          <form onChange={this.onFormChange}ref="newCapsule" className="hidden">
             <input
-              onChange={this.onNameChange}
               ref="capsuleName"
               className="inputs"
               type="text"
               placeholder="Who is this capsule for?"/>
             <input
-              onChange={this.onEventChange}
               ref="capsuleEvent"
               className="inputs"
               type="text"
-              placeholder="event" />
+              placeholder="event"/>
             <input
-              onChange={this.onDateChange}
               ref="capsuleDate"
               className="inputs"
               type="date"/>
@@ -131,19 +149,33 @@ export default React.createClass({
               Cancel
             </button>
           </form>
-          <section className="newCapsules__Container">
-            <section ref="capsuleArea" className="capsule__Unit">
-              <h2 className="newCapTitle" > Lucio's capsule </h2>
-              <h3 className="newCapEvent">  football games</h3>
-              <h3 className="newCapDate">04/05/2017</h3>
-              <div className="div__Capsule--Top">
-                <i className="fa-mine-top fa-bars lines" aria-hidden="true"></i>
-                </div>
-              <div className="div__Capsule--Bottom">
-                <i className="fa-mine-bottom fa-bars lines" aria-hidden="true">
-              </i>
-              </div>
-            </section>
+          <button onClick={this.getCamera}>Take a Picture</button>
+          <video ref="video" className="video"></video>
+          <canvas ref="canvas"></canvas>
+          <button onClick={this.snap}>Snap</button>
+          <section ref="capsuleArea" className="newCapsules__Container">
+            {
+              Object.keys(this.state.capsuleData).map((i, capsule) => {
+                var newCapsule = this.state.capsuleData
+                if( newCapsule[i].capsuleName === ""){
+
+                  return <h2> Create your new Capsule above </h2>
+                } else {
+                  console.log(this.state.capsuleData);
+                return <section className="capsule__Unit" key={i}>
+                          <h2 className="newCapTitle" >{newCapsule[i].capsuleName}</h2>
+                          <h3 className="newCapEvent">{newCapsule[i].capsuleEvent}</h3>
+                          <h3 className="newCapDate">{newCapsule[i].capsuleDate}</h3>
+                          <div className="div__Capsule--Top">
+                            <i className="fa-mine-top fa-bars lines" aria-hidden="true"></i>
+                          </div>
+                          <div className="div__Capsule--Bottom">
+                            <i className="fa-mine-bottom fa-bars lines" aria-hidden="true"></i>
+                          </div>
+                        </section>
+                 }
+              })
+            }
           </section>
       </section>
     )

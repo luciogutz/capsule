@@ -8,7 +8,7 @@
 /* All styles for landing page sign in*/
 .capsule {
   font-size: 82px;
-  color: #03A9F4;
+  color: #81D4FA;
   margin: 2%;
 }
 
@@ -71,11 +71,12 @@
   display: inline-block;
   font-size: 100px;
   margin-left: 37%;
-  margin-top: -1000px;
+  margin-top: 10px;
   margin-bottom: 0;
   vertical-align: middle;
   line-height: 100px;
   color: #03A9F4;
+  position: absolute;
 }
 
 .header__UserName {
@@ -241,4 +242,10 @@
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     margin-bottom: 40%;
+}
+
+.video {
+  width: 400px;
+  height: 300px;
+  background-color: lightGrey;
 }

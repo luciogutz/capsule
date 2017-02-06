@@ -43,21 +43,6 @@ export default React.createClass({
      })
    })
  },
-  signUserIn() {
-    firebase.auth().signInWithRedirect(this.state.provider);
-    firebase.auth().getRedirectResult().then((result) => {
-      if(result.credential) {
-        var token = result.credential.accessToken;
-      }
-    }).catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      var email = error.email;
-      var credential = error.credential;
-      console.log("ERROR authenticating with firebase: " + errorMessage);
-      //FIXME: Better logging/error handling
-    })
-  },
   render() {
     return(
       <section className="welcome">
