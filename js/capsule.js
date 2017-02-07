@@ -36,14 +36,14 @@ export default React.createClass({
 
      firebase.database().ref().update(currentUser)
 
-     firebase.database().ref("/users/" + user.uid).once("value").then((snapshot) => {
+     firebase.database().ref("/users/" + authUser.uid).once("value").then((snapshot) => {
        var snapshotReturn = snapshot.val()
        this.setState({
          currentUser: {
            authed: true,
            email: snapshotReturn.email,
            name: snapshotReturn.Name,
-           picture: snapshotreturn.picture,
+           picture: snapshotReturn.picture,
            lastLogin: snapshotReturn.lastLogin
         }
        })
@@ -85,7 +85,7 @@ export default React.createClass({
       <section>
         {React.cloneElement(this.props.children, { signUserInFunc: this.signUserIn,
         signUserOutFunc: this.signUserOut})}
-      <Footer />  
+      <Footer />
       </section>
     )
   }

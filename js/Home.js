@@ -2,6 +2,7 @@ import React from 'react'
 import {browserHistory} from 'react-router'
 import Reactfire from 'reactfire'
 import Firebase from 'firebase'
+import Capsule_List from './Capsule_List'
 
 export default React.createClass({
   getDefaultProps() {
@@ -36,9 +37,6 @@ export default React.createClass({
     var photo = this.refs.photo
     var canvas = this.refs.canvas
     var context = canvas.getContext('2d')
-    console.log("Visafasd w: " + video.videoWidth)
-    console.log("Canvas w: " + canvas.width)
-    console.log('photo w: ' + photo.width)
 
     context.drawImage(video, 0, 0)
     photo.setAttribute('src', canvas.toDataURL("image/png"))
@@ -47,49 +45,37 @@ export default React.createClass({
     this.refs.newCapsule.className = "newCapsuleForm"
   },
   getInitialState() {
-    var d = new Date()
-    const currentDate = d.toDateString()
-    let id = Date.now()
+
     return {
         userName: "",
         userEmail: "",
         userPicture: "",
         capsuleData: {
-          0:{
               capsuleName: "",
               capsuleEvent: "",
               capsuleDate: "",
               capsuleID: "",
-              capsuleUID: id
             },
-
-        }
-      }
+       }
     },
   onFormChange() {
-    var UID = this.state.capsuleData[0].capsuleUID;
+    var UID = this.state.capsuleData.capsuleUID;
 
     this.setState({
       capsuleData: {
-        0: {
           capsuleName: this.refs.capsuleName.value,
           capsuleEvent: this.refs.capsuleEvent.value,
           capsuleDate: this.refs.capsuleDate.value,
           caspuleID: this.props.params.userID,
-          capsuleUID: UID
-        }
       }
     })
   },
   onNewCapsuleSubmit(e) {
     e.preventDefault()
     // sending data to firebase
-    var capsuleUserDatabase = {}
     var capsule = this.state.capsuleData
-    capsuleUserDatabase["/capsules/" + this.state.capsuleData[0].capsuleUID] = {
-      capsule
-    }
-    firebase.database().ref().update(capsuleUserDatabase)
+
+    firebase.database().ref("/capsules/" + this.props.params.userID ).push().update(capsule)
     this.refs.newCapsule.className = "hidden"
     this.refs.capsuleName.value = ""
     this.refs.capsuleEvent.value = ""
@@ -101,11 +87,15 @@ export default React.createClass({
     },
   componentWillMount() {
     firebase.database().ref("/users/" + this.props.params.userID).once("value").then((snapshot) => {
+
       const capsuleUser = snapshot.val()
+      console.log(capsuleUser)
       var updatedUserName = capsuleUser.name
       var updatedUserEmail = capsuleUser.email
       var updatedUserPicture = capsuleUser.picture
-      var capsules = capsuleUser.capsules.userInfo
+      // FIXME: Need to get capsule data
+      var capsules = this.state.capsuleData
+//      console.log("CAPSULES: " + capsules)
       this.setState({
         userName: updatedUserName,
         userEmail: updatedUserEmail,
@@ -115,7 +105,6 @@ export default React.createClass({
     })
   },
   render() {
-
     return(
       <section>
         <div>
@@ -165,28 +154,17 @@ export default React.createClass({
             <button onClick={this.onPhotoSnap}>Snap</button>
           </div>
           <section ref="capsuleArea" className="newCapsules__Container">
-            {
-              Object.keys(this.state.capsuleData).map((i, capsule) => {
-                var newCapsule = this.state.capsuleData
-                if( newCapsule[i].capsuleName === ""){
-
-                  return <h2> Create your new Capsule above </h2>
-                } else {
-                  console.log(this.state.capsuleData);
-                return <section className="capsule__Unit" key={i}>
-                          <h2 className="newCapTitle" >{newCapsule[i].capsuleName}</h2>
-                          <h3 className="newCapEvent">{newCapsule[i].capsuleEvent}</h3>
-                          <h3 className="newCapDate">{newCapsule[i].capsuleDate}</h3>
-                          <div className="div__Capsule--Top">
-                            <i className="fa-mine-top fa-bars lines" aria-hidden="true"></i>
-                          </div>
-                          <div className="div__Capsule--Bottom">
-                            <i className="fa-mine-bottom fa-bars lines" aria-hidden="true"></i>
-                          </div>
-                        </section>
-                 }
-              })
-            }
+            <section className="capsule__Unit">
+                <h2 className="newCapTitle" >{this.state.capsuleData.capsuleName}</h2>
+                <h3 className="newCapEvent">{this.state.capsuleData.capsuleEvent}</h3>
+                <h3 className="newCapDate">{this.state.capsuleData.capsuleDate}</h3>
+                <div className="div__Capsule--Top">
+                  <i className="fa-mine-top fa-bars lines" aria-hidden="true"></i>
+                </div>
+                <div className="div__Capsule--Bottom">
+                  <i className="fa-mine-bottom fa-bars lines" aria-hidden="true"></i>
+                </div>
+            </section>
           </section>
       </section>
     )
