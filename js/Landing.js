@@ -15,7 +15,7 @@ export default React.createClass({
 
    firebase.auth().onAuthStateChanged((authUser) => {
      if(authUser) {
-       window.location = '#/home/' //After successful login, user will be redirected to home.
+       window.location = '#/home/:userID' //After successful login, user will be redirected to home.
       }
        var today = new Date()
        var currentUser = {};
@@ -37,7 +37,7 @@ export default React.createClass({
            authed: true,
            email: snapshotReturn.email,
            name: snapshotReturn.Name,
-           picture: snapshotreturn.picture,
+           picture: snapshotReturn.picture,
            lastLogin: snapshotReturn.lastLogin,
            uid:authUser.uid
         }

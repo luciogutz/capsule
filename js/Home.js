@@ -72,7 +72,7 @@ export default React.createClass({
     })
   },
   onNewCapsuleSubmit(e) {
-    e.preventDefault()
+    // e.preventDefault()
     // sending data to firebase
     var capsule = this.state.capsuleData
 
@@ -154,10 +154,8 @@ export default React.createClass({
             <button onClick={this.onPhotoSnap}>Snap</button>
           </div>
           <section ref="capsuleArea" className="newCapsules__Container">
-          <Capsule_List />
+          <Capsule_List userID={this.props.params.userID}/>
           </section>
-
-          <Link to={"/capsule_list/" + this.props.params.userID}> See your capsules here </Link>
       </section>
     )
   }
