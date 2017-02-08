@@ -80,20 +80,23 @@
 }
 
 .header__UserName {
+  font-size: 20px;
   display: inline-block;
   margin-top: 0;
   margin-bottom: 0;
+  margin-left: 64px;
   vertical-align: bottom;
-  height: 50px;
+  height: 100px;
+  line-height: 100px;
 }
 
 .header__UserImage {
   height: 50px;
   border-radius: 100px;
   vertical-align: middle;
-  margin-right: 3%;
-  margin-bottom: 11%;
+  margin-right: 8%;
   position: absolute;
+  margin-top: 2%;
 }
 
 .header__Image {
@@ -101,35 +104,44 @@
   margin-left: auto;
   margin-right: auto;
   z-index: -1;
+  margin-bottom: 2%;
 }
 
 .signOut {
- z-index: -1;
- margin-left: 39px;
+ margin-left: 20px;
  border: none;
  background-color: white;
  color: #CDDC39;
  font-size: 20px;
+ height: 100px;
 }
 
 .header__Right {
   float: right;
   margin-right: 5%;
   width: 20%;
-  height: 50px;
-  margin-top: 2%;
+  height: 100px;
 }
 /* End of header elements including title */
 
+.aside__Wrapper {
+  width: 300px;
+  height: auto;
+  border-right: solid black 1px;
+  border-bottom: solid black 1px;
+}
+
 .newCapsule {
-  border: none;
-  background-color: white;
+  border-radius: 8px;
+  background-color: rgb(94, 226, 191);
   font-size: 25px;
-  margin-left: 2%;
-  line-height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 50px;
   vertical-align: middle;
-  padding: 0;
+  padding: 8px;
   display: block;
+
 }
 
 .newCapsuleForm {
@@ -138,6 +150,7 @@
   border: solid #03A9F4 3px;
   margin-left: 2%;
   position: relative;
+  z-index: 4;
 }
 
 .inputs {
@@ -180,18 +193,18 @@
   margin: 1%;
 }
 
-.newCapsules__Container {
+/*.newCapsules__Container {
   width: 80%;
   border: solid grey 2px;
   margin-left: auto;
   margin-right: auto;
   z-index: -1;
-}
+}*/
 
 .capsule__Unit {
-  float: left;
+  /*float: left;*/
   text-align: center;
-  width: 30%;
+  width: 300px;
   margin-bottom: 8%;
   margin-left: 2%;
   margin-right: auto;

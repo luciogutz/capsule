@@ -107,17 +107,18 @@ export default React.createClass({
   render() {
     return(
       <section>
+        <header className="header">
+            <div className="header__Right">
+              <img className="header__UserImage" src={this.state.userPicture}/>
+              <p className="header__UserName"> {this.state.userName} </p>
+              <button className="signOut" onClick={this.props.signUserOutFunc}> Sign Out </button>
+            </div>
+        </header>
         <div>
           <h1 className="header__Title"> Capsule </h1>
           <img className="header__Image" src="http://www.theldsfamilyfellowship.org/wp-content/uploads/2016/06/9807-family-bg.jpg" />
-          <header className="header">
-              <div className="header__Right">
-                <img className="header__UserImage" src={this.state.userPicture}/>
-                <p className="header__UserName"> {this.state.userName} </p>
-                <button className="signOut" onClick={this.props.signUserOutFunc}> Sign Out </button>
-              </div>
-          </header>
         </div>
+        <aside className="aside__Wrapper">
           <button onClick={this.onCreateNewCapsule} className="newCapsule"> + new capsule </button>
           <form onChange={this.onFormChange}ref="newCapsule" className="hidden">
             <input
@@ -147,6 +148,8 @@ export default React.createClass({
             </button>
           </form>
           <button onClick={this.getCamera}>Take a Picture</button>
+          <Capsule_List userID={this.props.params.userID}/>
+        </aside>
           <div ref="cameraContainer" className="hidden">
             <video ref="video" className="video" width="600" height="475"></video>
             <canvas className="canvas" ref="canvas" width="600" height="475"></canvas>
@@ -154,7 +157,6 @@ export default React.createClass({
             <button onClick={this.onPhotoSnap}>Snap</button>
           </div>
           <section ref="capsuleArea" className="newCapsules__Container">
-          <Capsule_List userID={this.props.params.userID}/>
           </section>
       </section>
     )
