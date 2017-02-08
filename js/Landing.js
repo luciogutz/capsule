@@ -29,15 +29,17 @@ export default React.createClass({
 
      firebase.database().ref().update(currentUser)
 
-     firebase.database().ref("/users/" + user.uid).once("value").then((snapshot) => {
+     firebase.database().ref("/users/" + authUser.uid).once("value").then((snapshot) => {
        var snapshotReturn = snapshot.val()
+       console.log("UID" + authUser.uid)
        this.setState({
          currentUser: {
            authed: true,
            email: snapshotReturn.email,
            name: snapshotReturn.Name,
            picture: snapshotreturn.picture,
-           lastLogin: snapshotReturn.lastLogin
+           lastLogin: snapshotReturn.lastLogin,
+           uid:authUser.uid
         }
        })
      })

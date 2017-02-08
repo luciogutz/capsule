@@ -13,7 +13,8 @@ export default React.createClass({
         currentName: "",
         name: "",
         picture: "",
-        lastLogin: undefined
+        lastLogin: undefined,
+        uid: ""
       }
     }
   },
@@ -44,7 +45,8 @@ export default React.createClass({
            email: snapshotReturn.email,
            name: snapshotReturn.Name,
            picture: snapshotReturn.picture,
-           lastLogin: snapshotReturn.lastLogin
+           lastLogin: snapshotReturn.lastLogin,
+           uid: authUser.uid
         }
        })
      })
@@ -74,7 +76,8 @@ export default React.createClass({
          name: '',
          email: '',
          picture: '',
-         lastLogin: undefined
+         lastLogin: undefined,
+         uid: ''
        }
      })
      window.location = '#/'
@@ -84,7 +87,8 @@ export default React.createClass({
     return (
       <section>
         {React.cloneElement(this.props.children, { signUserInFunc: this.signUserIn,
-        signUserOutFunc: this.signUserOut})}
+        signUserOutFunc: this.signUserOut,
+        user: this.state.user})}
       <Footer />
       </section>
     )

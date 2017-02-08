@@ -12,7 +12,7 @@ render(
       <Route component={ Capsule }>
         <Route path="/" component={ Landing }/>
         <Route path="/home/:userID" component={ Home }/>
-        <Route path="/Capsule_list" component={ Capsule_List }/>
+        <Route path="/capsule_list/:userID" component={ Capsule_List }/>
       </Route>
     </Router>
   ),

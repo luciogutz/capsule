@@ -1,5 +1,5 @@
 import React from 'react'
-import {browserHistory} from 'react-router'
+import {browserHistory, Link} from 'react-router'
 import Reactfire from 'reactfire'
 import Firebase from 'firebase'
 import Capsule_List from './Capsule_List'
@@ -7,7 +7,8 @@ import Capsule_List from './Capsule_List'
 export default React.createClass({
   getDefaultProps() {
     return {
-      user: { authed: false }
+      user: { authed: false,
+      uid: 'xx' }
     }
   },
   getCamera() {
@@ -89,7 +90,6 @@ export default React.createClass({
     firebase.database().ref("/users/" + this.props.params.userID).once("value").then((snapshot) => {
 
       const capsuleUser = snapshot.val()
-      console.log(capsuleUser)
       var updatedUserName = capsuleUser.name
       var updatedUserEmail = capsuleUser.email
       var updatedUserPicture = capsuleUser.picture
@@ -154,18 +154,10 @@ export default React.createClass({
             <button onClick={this.onPhotoSnap}>Snap</button>
           </div>
           <section ref="capsuleArea" className="newCapsules__Container">
-            <section className="capsule__Unit">
-                <h2 className="newCapTitle" >{this.state.capsuleData.capsuleName}</h2>
-                <h3 className="newCapEvent">{this.state.capsuleData.capsuleEvent}</h3>
-                <h3 className="newCapDate">{this.state.capsuleData.capsuleDate}</h3>
-                <div className="div__Capsule--Top">
-                  <i className="fa-mine-top fa-bars lines" aria-hidden="true"></i>
-                </div>
-                <div className="div__Capsule--Bottom">
-                  <i className="fa-mine-bottom fa-bars lines" aria-hidden="true"></i>
-                </div>
-            </section>
+          <Capsule_List />
           </section>
+
+          <Link to={"/capsule_list/" + this.props.params.userID}> See your capsules here </Link>
       </section>
     )
   }
