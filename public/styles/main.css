@@ -129,6 +129,12 @@
   height: auto;
   border-right: solid black 1px;
   border-bottom: solid black 1px;
+  float: left;
+}
+
+.capsule__default--Image {
+  height: 200px;
+  border-radius: 100px;
 }
 
 .newCapsule {
@@ -141,16 +147,16 @@
   vertical-align: middle;
   padding: 8px;
   display: block;
-
 }
 
 .newCapsuleForm {
   height: 300px;
   width: 300px;
   border: solid #03A9F4 3px;
-  margin-left: 2%;
-  position: relative;
+  margin-left: 20%;
+  position: absolute;
   z-index: 4;
+  background-color: white;
 }
 
 .inputs {
@@ -168,7 +174,7 @@
 }
 
 .formSubmit {
-  background-color: #CDDC39;
+  background-color: rgb(249, 139, 127);
   border-radius: 8px;
   display: block;
   margin-left: auto;
@@ -177,6 +183,19 @@
   height: 50px;
   width: 90%;
   font-size: 20px;
+}
+
+.picture__Button {
+  border-radius: 8px;
+  background-color: rgb(94, 226, 191);
+  font-size: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 50px;
+  vertical-align: middle;
+  padding: 8px;
+  display: block;
+  margin-top: 2%;
 }
 
 /* capsule design elements */
@@ -206,7 +225,7 @@
   text-align: center;
   width: 300px;
   margin-bottom: 8%;
-  margin-left: 2%;
+  margin-left: auto;
   margin-right: auto;
 }
 
@@ -258,24 +277,43 @@
 }
 
 .video {
-  width: 600px;
-  height: 475px;
+  width: 700px;
+  height: 575px;
   /*background-color: lightgrey;*/
 }
 
 .canvas {
-  width: 600px;
-  height: 475px;
+  width: 700px;
+  height: 575px;
   background-color: lightgrey;
   display: none;
 }
 
 .photoSnap {
-  width: 600px;
-  height: 475px;
+  width: 700px;
+  height: 575px;
+}
+
+.snap:hover {
+  background-color: green;
+}
+
+.snap {
+  height: 50px;
+  width: 50px;
+  border-radius: 100px;
+  position: absolute;
+  z-index: 4;
+  margin-left: 25%;
+  margin-top: 38%;
+  background-color: red;
+  color: white;
 }
 
 .cameraScreen {
-  width: 600px;
-  height: 475px;
+  width: 700px;
+  height: 575px;
+  display: inline-block;
+  float: right;
+  margin-right: 14.5%
 }

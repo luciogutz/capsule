@@ -83,10 +83,26 @@ export default React.createClass({
      window.location = '#/'
    })
  },
+ onDragStart(e){
+   e.dataTransfer.setData("image/png", e.target.id)
+ },
+ onDrop(e) {
+   e.preventDefault()
+   var data = e.dataTransfer.getData("image/png")
+   e.target.appendChild(document.getElementById(data))
+ },
+ onDragOver(e){
+   e.preventDefault()
+ },
   render() {
+
     return (
       <section>
-        {React.cloneElement(this.props.children, { signUserInFunc: this.signUserIn,
+        {React.cloneElement(this.props.children, {
+        onDragStart: this.onDragStart,
+        onDrop: this.onDrop,
+        onDragOver: this.onDragOver,
+        signUserInFunc: this.signUserIn,
         signUserOutFunc: this.signUserOut,
         user: this.state.user})}
       <Footer />

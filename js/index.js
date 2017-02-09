@@ -8,13 +8,13 @@ import Capsule_List from './Capsule_List'
 
 render(
   (
-    <Router history={ hashHistory }>
-      <Route component={ Capsule }>
-        <Route path="/" component={ Landing }/>
-        <Route path="/home/:userID" component={ Home }/>
-        <Route path="/capsule_list/:userID" component={ Capsule_List }/>
-      </Route>
-    </Router>
+  <Router history={ hashHistory }>
+    <Route component={ Capsule }>
+      <Route path="/" component={ Landing }/>
+      <Route path="/home/:userID" component={ Home }/>
+      <Route path="/capsule_list/:userID" component={ Capsule_List }/>
+    </Route>
+  </Router>
   ),
   document.getElementById("app")
 )
