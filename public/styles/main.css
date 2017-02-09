@@ -132,11 +132,6 @@
   float: left;
 }
 
-.capsule__default--Image {
-  height: 200px;
-  border-radius: 100px;
-}
-
 .newCapsule {
   border-radius: 8px;
   background-color: rgb(94, 226, 191);
@@ -229,52 +224,11 @@
   margin-right: auto;
 }
 
-.div__Capsule--Top {
-  border: solid black 3px;
-  height: 100px;
-  width: 100px;
-  border-radius: 50px 50px 0px 0px;
-  margin: 0 auto;
-  z-index: -1;
-}
-
-.div__Capsule--Bottom {
-  border: solid black 3px;
-  height: 100px;
-  width: 100px;
-  border-radius: 0px 0px 50px 50px;
-  margin: 0 auto;
-  z-index: -1;
-}
-
-.div__Capsule--CrossBar {
-  height: 20px;
-  width: 100px;
-  border: solid black 2px;
-  margin-top: 46px;
-}
 
 .lines {
   margin-top: 20%;
 }
 
-.fa-mine-top {
-  display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: 40px;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    margin-top: 40%;
-}
-
-.fa-mine-bottom {
-  display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: 40px;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    margin-bottom: 40%;
-}
 
 .video {
   width: 700px;
@@ -318,8 +272,27 @@
   margin-right: 14.5%
 }
 
-/*.div {
+.div {
   height: 400px;
   width: 500px;
   border: solid black 1px;
-}*/
+  margin-top: 55%;
+}
+
+.divOver:hover {
+  border: solid yellow 3px;
+}
+
+.capsule__default--Image {
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+  border: solid black 1px;
+  margin: auto;
+}
+
+.userImage {
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+}

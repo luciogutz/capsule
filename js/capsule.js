@@ -86,22 +86,12 @@ export default React.createClass({
  onDragStart(e){
    e.dataTransfer.setData("text", e.target.id)
  },
- onDrop(e) {
-   e.preventDefault()
-   var data = e.dataTransfer.getData("text")
-   e.target.appendChild(document.getElementById(data))
- },
- onDragOver(e){
-   e.preventDefault()
- },
   render() {
 
     return (
       <section>
         {React.cloneElement(this.props.children, {
         onDragStart: this.onDragStart,
-        onDrop: this.onDrop,
-        onDragOver: this.onDragOver,
         signUserInFunc: this.signUserIn,
         signUserOutFunc: this.signUserOut,
         user: this.state.user})}

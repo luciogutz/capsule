@@ -100,7 +100,6 @@ export default React.createClass({
     })
   },
   render() {
-
     return(
       <section>
         <header className="header">
@@ -115,7 +114,7 @@ export default React.createClass({
           <img className="header__Image" src="https://github.com/luciogutz/capsule/blob/master/photos/PicsArt_02-03-05.56.45.jpg?raw=true" />
         </div>
         <aside className="aside__Wrapper">
-          <button onClick={this.onCreateNewCapsule} className="newCapsule"> + new capsule </button>
+          <button onClick={this.onCreateNewCapsule} className="newCapsule"> + new cAPPsule </button>
           <form onChange={this.onFormChange}ref="newCapsule" className="hidden">
             <input
               ref="capsuleName"
@@ -150,7 +149,9 @@ export default React.createClass({
             <button className="snap" ref="snap" onClick={this.onPhotoSnap}>Snap</button>
             <video ref="video" className="video" width="700" height="575"></video>
             <canvas className="canvas" ref="canvas" width="700" height="575"></canvas>
-            <img id="drag1"
+            <img
+              ref="userImage"
+              id="drag1"
               draggable="true"
               onDragStart={this.props.onDragStart}
               className="photoSnap" ref="photo"/>

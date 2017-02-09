@@ -15,7 +15,23 @@ export default React.createClass({
       capsules: []
     }
   },
+  onDrop(e) {
+    e.preventDefault()
+    var data = e.dataTransfer.getData("text")
+    var imageElement = document.getElementById(data)
+    var newImageElement = imageElement.cloneNode(true)
+    newImageElement.id = e.currentTarget.id + "image"
+    while (e.currentTarget.firstChild) {
+      e.currentTarget.removeChild(e.currentTarget.firstChild)
+    }
+    e.currentTarget.appendChild(newImageElement)
+    newImageElement.className = "capsule__default--Image"
+    e.dataTransfer.clearData()
 
+  },
+  onDragOver(e){
+    e.preventDefault()
+  },
   componentDidMount() {
     var component = this
     var userID
@@ -40,14 +56,18 @@ export default React.createClass({
           Object.keys(this.state.capsules).map((i)=>
           {
           return(
-            <section key={i} className="capsule__Unit">
-                <h2 className="newCapTitle">{this.state.capsules[i].capsuleName}</h2>
-                <h3 className="newCapEvent">{this.state.capsules[i].capsuleEvent}</h3>
-                <h3 className="newCapDate">{this.state.capsules[i].capsuleDate}</h3>
-                <img id="div1"
-                   onDragOver={this.props.onDragOver}
-                   onDrop={this.props.onDrop}
-                   className="capsule__default--Image" src="http://www.cdn.innesvienna.net//Content/user-default.png"/>
+            <section key={i}
+              className="capsule__Unit">
+              <h2 className="newCapTitle">{this.state.capsules[i].capsuleName}</h2>
+              <h3 className="newCapEvent">{this.state.capsules[i].capsuleEvent}</h3>
+              <h3 className="newCapDate">{this.state.capsules[i].capsuleDate}</h3>
+              <div
+                onClick={this.showImages}
+                className="capsule__default--Image"
+                id={"capsuleImage" + i}
+                onDragOver={this.onDragOver}
+                onDrop={this.onDrop}>
+              </div>
             </section>
            )
          })
