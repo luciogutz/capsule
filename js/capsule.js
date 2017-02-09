@@ -84,11 +84,11 @@ export default React.createClass({
    })
  },
  onDragStart(e){
-   e.dataTransfer.setData("image/png", e.target.id)
+   e.dataTransfer.setData("text", e.target.id)
  },
  onDrop(e) {
    e.preventDefault()
-   var data = e.dataTransfer.getData("image/png")
+   var data = e.dataTransfer.getData("text")
    e.target.appendChild(document.getElementById(data))
  },
  onDragOver(e){
