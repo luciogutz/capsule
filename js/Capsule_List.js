@@ -20,7 +20,7 @@ export default React.createClass({
     var data = e.dataTransfer.getData("text")
     var imageElement = document.getElementById(data)
     var newImageElement = imageElement.cloneNode(true)
-    newImageElement.id = e.currentTarget.id + "image"
+    newImageElement.id = e.currentTarget.id
     while (e.currentTarget.firstChild) {
       e.currentTarget.removeChild(e.currentTarget.firstChild)
     }
@@ -28,6 +28,9 @@ export default React.createClass({
     newImageElement.className = "capsule__default--Image"
     e.dataTransfer.clearData()
 
+    var imageStorage = firebase.storage()
+    var storageRef = imageStorage.ref()
+    console.log(storageRef)
   },
   onDragOver(e){
     e.preventDefault()
