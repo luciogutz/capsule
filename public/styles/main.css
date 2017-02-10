@@ -6,27 +6,22 @@
  }
 
 /* All styles for landing page sign in*/
-.capsule {
+/*.capsule {
   font-size: 82px;
   color: #81D4FA;
   margin: 2%;
-}
+}*/
 
 .subTitle {
-  margin: 2%;
+  margin: auto;
+  margin-bottom: 2%;
   color: #CDDC39;
 }
 
-.signInForm {
-  width: 30%;
-  text-align: center;
-  margin: 2% auto;
-}
-
-.started {
+/*.started {
   margin: 2%;
   color: #607D8B;
-}
+}*/
 
 .gmail {
   outline: none;
@@ -39,20 +34,36 @@
   font-size: 32px;
   text-align: center;
   /*border: solid lightgrey 1px;*/
-  width: 60%;
-  margin: 20% auto;
+  width: 100%;
+  margin: 5% auto;
 }
 
 .googleSignIn:hover {
-  background-color: red;
+  border: solid yellow 1px;
+}
+
+.facebookSignIn:hover {
+  border: solid yellow 1px;
+}
+
+.facebookSignIn {
+  height: 50px;
+  border-radius: 8px;
+  color: white;
+  background-color: rgb(72, 103, 170);
+  font-size: large;
+  display: block;
+  width: 45%;
+  margin-left: 27.5%;
 }
 
 .googleSignIn {
   height: 50px;
   border-radius: 8px;
   color: white;
-  background-color: #00A1F1;
+  background-color: red;
   font-size: large;
+  width: 45%;
 }
 
 /* End of landing page styles and sign in */
@@ -101,10 +112,16 @@
 
 .header__Image {
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  height: 100%;
   z-index: -1;
   margin-bottom: 2%;
+  position: relative;;
+}
+
+.user__Login {
+  position: absolute;
+  margin-top: 25%;
+  width: 40%;
 }
 
 .signOut {
@@ -122,15 +139,22 @@
   width: 20%;
   height: 100px;
 }
+
+.capsule__display {
+  width: 100%;
+  height: 30%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
 /* End of header elements including title */
 
-.aside__Wrapper {
+/*.aside__Wrapper {
   width: 300px;
   height: auto;
   border-right: solid black 1px;
   border-bottom: solid black 1px;
   float: left;
-}
+}*/
 
 .newCapsule {
   border-radius: 8px;
@@ -222,6 +246,7 @@
   margin-bottom: 8%;
   margin-left: auto;
   margin-right: auto;
+  display: inline-block;
 }
 
 

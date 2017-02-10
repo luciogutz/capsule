@@ -48,10 +48,12 @@ export default React.createClass({
   render() {
     return(
       <section className="welcome">
-        <h1 className="capsule"> CAPSULE </h1>
-        <h4 className="subTitle"> Dont let time get away from you. </h4>
-        <p className="started"> Let's get started </p>
-        <button onClick={this.props.signUserInFunc} className="googleSignIn"> Sign in with your Google Account </button>
+        <div className="user__Login">
+          <h4 className="subTitle"> Sign In </h4>
+          <button onClick={this.props.signUserInFunc} className="googleSignIn"> Sign in with Google </button>
+          <button onClick={this.props.signUserInFunc} className="facebookSignIn"> Sign with Facebook </button>
+        </div>
+        <img className="header__Image" src="https://github.com/luciogutz/capsule/blob/master/photos/PicsArt_02-03-05.56.45.jpg?raw=true" />
       </section>
     )
   }

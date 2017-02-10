@@ -62,7 +62,7 @@ export default React.createClass({
           capsuleName: this.refs.capsuleName.value,
           capsuleEvent: this.refs.capsuleEvent.value,
           capsuleDate: this.refs.capsuleDate.value,
-          caspuleID: this.props.params.userID,
+            caspuleID: this.props.params.userID,
       }
     })
   },
@@ -111,8 +111,10 @@ export default React.createClass({
         </header>
         <div>
           <h1 className="header__Title"></h1>
-          <img className="header__Image" src="https://github.com/luciogutz/capsule/blob/master/photos/PicsArt_02-03-05.56.45.jpg?raw=true" />
         </div>
+        <section className="capsule__display">
+          <Capsule_List userID={this.props.params.userID}/>
+        </section>
         <aside className="aside__Wrapper">
           <button onClick={this.onCreateNewCapsule} className="newCapsule"> + new cAPPsule </button>
           <form onChange={this.onFormChange}ref="newCapsule" className="hidden">
@@ -143,7 +145,6 @@ export default React.createClass({
             </button>
           </form>
           <button className="picture__Button" onClick={this.getCamera}>Take a Picture</button>
-          <Capsule_List userID={this.props.params.userID}/>
         </aside>
           <div ref="cameraContainer" className="hidden">
             <button className="snap" ref="snap" onClick={this.onPhotoSnap}>Snap</button>

@@ -28,9 +28,14 @@ export default React.createClass({
     newImageElement.className = "capsule__default--Image"
     e.dataTransfer.clearData()
 
-    var imageStorage = firebase.storage()
-    var storageRef = imageStorage.ref()
-    console.log(storageRef)
+    var imageRef = firebase.storage().ref()
+    var imageID = newImageElement.id
+    console.log(imageID)
+    var targetImage = imageRef.child('images/' + imageID + '.png')
+    var newBase64 = newImageElement.src.replace(/^data:image\/(png|jpeg);base64,/, "")
+    targetImage.putString(newBase64, 'base64', {contentType:'image/png'}).then(function(){
+      console.log('it worked?')
+    })
   },
   onDragOver(e){
     e.preventDefault()
