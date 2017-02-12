@@ -103,15 +103,15 @@ export default React.createClass({
     return(
       <section>
         <header className="header">
+            <img
+               className="logo__Image"
+               src="https://github.com/luciogutz/capsule/blob/master/photos/Screen%20Shot%202017-02-11%20at%2011.55.48%20PM.png?raw=true" />
             <div className="header__Right">
               <img className="header__UserImage" src={this.state.userPicture}/>
               <p className="header__UserName"> {this.state.userName} </p>
               <button className="signOut" onClick={this.props.signUserOutFunc}> Sign Out </button>
             </div>
         </header>
-        <div>
-          <h1 className="header__Title"></h1>
-        </div>
         <section className="capsule__display">
           <Capsule_List userID={this.props.params.userID}/>
         </section>

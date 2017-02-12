@@ -71,11 +71,13 @@ export default React.createClass({
                 className="capsule__default--Image"
                 id={"capsuleImage" + i}
                 onDragOver={this.onDragOver}
-                onDrop={this.onDrop}>
+                onDrop={this.onDrop}> Add A Photo
               </div>
-              <h2 className="newCapTitle">{this.state.capsules[i].capsuleName}</h2>
-              <h3 className="newCapEvent">{this.state.capsules[i].capsuleEvent}</h3>
-              <h3 className="newCapDate">{this.state.capsules[i].capsuleDate}</h3>
+              <article className="capsule__Info">
+                <h2 className="newCapTitle">{this.state.capsules[i].capsuleName}</h2>
+                <h3 className="newCapEvent">{this.state.capsules[i].capsuleEvent}</h3>
+                <h3 className="newCapDate">{this.state.capsules[i].capsuleDate}</h3>
+              </article>
             </section>
            )
          })
