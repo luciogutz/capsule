@@ -85,18 +85,6 @@
 
 }
 
-.header__Title {
-  display: inline-block;
-  font-size: 100px;
-  margin-left: 37%;
-  margin-top: 10px;
-  margin-bottom: 0;
-  vertical-align: middle;
-  line-height: 100px;
-  color: #03A9F4;
-  position: absolute;
-}
-
 .header__UserName {
   font-size: 20px;
   display: inline-block;
@@ -152,6 +140,7 @@
   height: 30%;
   overflow-x: scroll;
   overflow-y: hidden;
+  padding-top: 20px;
 }
 
 .capsule__Container {
@@ -326,6 +315,8 @@
 
 .capsule__Info {
   border-top: solid black 2px;
+  height: 100px;
+  background-color: white;
 }
 
 .capsule__default--Image {

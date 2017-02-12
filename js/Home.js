@@ -112,6 +112,7 @@ export default React.createClass({
               <button className="signOut" onClick={this.props.signUserOutFunc}> Sign Out </button>
             </div>
         </header>
+
         <section className="capsule__display">
           <Capsule_List userID={this.props.params.userID}/>
         </section>
