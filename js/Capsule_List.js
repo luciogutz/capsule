@@ -59,16 +59,13 @@ export default React.createClass({
   },
   render() {
     return (
-      <section>
+      <section className="capsule__Container">
         {
           Object.keys(this.state.capsules).map((i)=>
           {
           return(
             <section key={i}
               className="capsule__Unit">
-              <h2 className="newCapTitle">{this.state.capsules[i].capsuleName}</h2>
-              <h3 className="newCapEvent">{this.state.capsules[i].capsuleEvent}</h3>
-              <h3 className="newCapDate">{this.state.capsules[i].capsuleDate}</h3>
               <div
                 onClick={this.showImages}
                 className="capsule__default--Image"
@@ -76,6 +73,9 @@ export default React.createClass({
                 onDragOver={this.onDragOver}
                 onDrop={this.onDrop}>
               </div>
+              <h2 className="newCapTitle">{this.state.capsules[i].capsuleName}</h2>
+              <h3 className="newCapEvent">{this.state.capsules[i].capsuleEvent}</h3>
+              <h3 className="newCapDate">{this.state.capsules[i].capsuleDate}</h3>
             </section>
            )
          })

@@ -71,7 +71,7 @@
 /* Start of home page styles */
 .header {
   height: 100px;
-  margin: 0;
+  margin: 0 0 3% 0;
 }
 
 .header__Div {
@@ -145,6 +145,14 @@
   height: 30%;
   overflow-x: scroll;
   overflow-y: hidden;
+}
+
+.capsule__Container {
+  height: 400px;
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 /* End of header elements including title */
 
@@ -242,10 +250,10 @@
 .capsule__Unit {
   /*float: left;*/
   text-align: center;
-  width: 300px;
+  width: 350px;
   margin-bottom: 8%;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 2%;
+  margin-right: 2%;
   display: inline-block;
 }
 
@@ -309,9 +317,8 @@
 }
 
 .capsule__default--Image {
-  height: 200px;
-  width: 200px;
-  border-radius: 100px;
+  height: 225px;
+  width: 350px;
   border: solid black 1px;
   margin: auto;
 }

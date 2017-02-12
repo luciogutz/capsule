@@ -1,0 +1,8 @@
+Code for capsule design
+
+<div className="div__Capsule--Top">
+  <i className="fa-mine-top fa-bars lines" aria-hidden="true"></i>
+</div>
+<div className="div__Capsule--Bottom">
+  <i className="fa-mine-bottom fa-bars lines" aria-hidden="true"></i>
+</div>
