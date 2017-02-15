@@ -3,6 +3,7 @@
 }
  body {
    margin: 0;
+   background-color: rgb(78, 122, 153);
  }
 
 /* All styles for landing page sign in*/
@@ -94,6 +95,7 @@
   vertical-align: bottom;
   height: 100px;
   line-height: 100px;
+  color: rgb(94, 226, 191);
 }
 
 .header__UserImage {
@@ -122,7 +124,7 @@
 .signOut {
  margin-left: 20px;
  border: none;
- background-color: white;
+ background-color: rgb(78, 122, 153);
  color: rgb(247, 138, 126);
  font-size: 20px;
  height: 100px;
@@ -166,6 +168,7 @@
   font-size: 25px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 2%;
   height: 50px;
   vertical-align: middle;
   padding: 8px;
@@ -208,19 +211,6 @@
   font-size: 20px;
 }
 
-.picture__Button {
-  border-radius: 8px;
-  background-color: rgb(94, 226, 191);
-  font-size: 25px;
-  margin-left: auto;
-  margin-right: auto;
-  height: 50px;
-  vertical-align: middle;
-  padding: 8px;
-  display: block;
-  margin-top: 2%;
-}
-
 /* capsule design elements */
 .newCapTitle {
   font-size: 28px;
@@ -251,7 +241,7 @@
   margin-left: 2%;
   margin-right: 2%;
   display: inline-block;
-  border: solid black 2px;
+  border: solid rgb(247, 138, 126) 2px;
 }
 
 
@@ -261,9 +251,8 @@
 
 
 .video {
-  width: 700px;
-  height: 575px;
-  /*background-color: lightgrey;*/
+  width: 90%;
+  height: auto;
 }
 
 .canvas {
@@ -274,8 +263,8 @@
 }
 
 .photoSnap {
-  width: 700px;
-  height: 575px;
+  width: 90%;
+  height: auto;
 }
 
 .snap:hover {
@@ -288,18 +277,18 @@
   border-radius: 100px;
   position: absolute;
   z-index: 4;
-  margin-left: 25%;
-  margin-top: 38%;
+  margin-left: 40%;
+  margin-top: 55%;
   background-color: red;
   color: white;
 }
 
 .cameraScreen {
-  width: 700px;
-  height: 575px;
+  width: 90%;
+  height: auto;
   display: inline-block;
-  float: right;
-  margin-right: 14.5%
+  margin-left: 10.25%;
+
 }
 
 .div {
@@ -314,7 +303,7 @@
 }
 
 .capsule__Info {
-  border-top: solid black 2px;
+  border-top: solid rgb(247, 138, 126) 2px;
   height: 100px;
   background-color: white;
 }

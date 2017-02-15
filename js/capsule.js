@@ -25,6 +25,7 @@ export default React.createClass({
      if(authUser) {
        window.location = `#/home/${authUser.uid}` //After successful login, user will be redirected to home.
       }
+      
        var today = new Date()
        var currentUser = {};
 

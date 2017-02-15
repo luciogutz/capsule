@@ -11,7 +11,7 @@ export default React.createClass({
       uid: 'xx' }
     }
   },
-  getCamera() {
+  componentDidMount() {
     this.refs.cameraContainer.className = "cameraScreen"
     this.refs.snap.className = "snap"
     var video = this.refs.video
@@ -145,11 +145,10 @@ export default React.createClass({
               Cancel
             </button>
           </form>
-          <button className="picture__Button" onClick={this.getCamera}>Take a Picture</button>
         </aside>
-          <div ref="cameraContainer" className="hidden">
+          <div ref="cameraContainer" className="cameraScreen">
             <button className="snap" ref="snap" onClick={this.onPhotoSnap}>Snap</button>
-            <video ref="video" className="video" width="700" height="575"></video>
+            <video ref="video" className="video" width="90%" height="auto"></video>
             <canvas className="canvas" ref="canvas" width="700" height="575"></canvas>
             <img
               ref="userImage"
