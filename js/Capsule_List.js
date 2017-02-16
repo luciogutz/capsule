@@ -13,7 +13,8 @@ export default React.createClass({
   getInitialState() {
     return {
       capsules: [],
-      images: []
+      images: [],
+      capsuleArray: []
     }
   },
   onDrop(e) {
@@ -60,15 +61,23 @@ export default React.createClass({
     }
     firebase.database().ref("/capsules/" + userID).once("value").then((snapshot) => {
       const currentCapsules = snapshot.val()
+      var parent = this
 
       Object.keys(currentCapsules).map((capsuleID, i)=> {
         firebase.database().ref("images/" + capsuleID).once("value").then((snapshot)=> {
           const currentCapsuleImages = snapshot.val()
 
+            // console.log(currentCapsuleImages)
           var imgSrc = ""
           Object.keys(currentCapsuleImages).map((imgSrc, i)=> {
-              firebase.database().ref("images")
-              // @TODO figure this out
+              firebase.database().ref("images/" + capsuleID).once("value").then((snapshot)=> {
+                const currentImgSrc = snapshot.val()
+                console.log(currentImgSrc)
+              })
+            Object.keys(currentImgSrc).map((ImageRef, i)=> {
+              
+            })
+
           })
           // map through currentCapsuleImages
           // imgSrc = image.storagePath
