@@ -2,6 +2,7 @@ import React from 'react'
 import {browserHistory} from 'react-router'
 import Reactfire from 'reactfire'
 import Firebase from 'firebase'
+import Modal from './Modal'
 
 export default React.createClass({
   getDefaultProps() {
@@ -32,7 +33,6 @@ export default React.createClass({
     e.dataTransfer.clearData()
 
     var uniqueImageID = new Date().getTime() + Math.random();
-    console.log(uniqueImageID)
     var imageRef = firebase.storage().ref()
     var imageID = newImageElement.id
     var targetImage = imageRef.child('images/' + imageID + uniqueImageID + '.png')
@@ -42,7 +42,6 @@ export default React.createClass({
         storagePath: 'images/' + imageID + uniqueImageID + '.png',
         capsuleID: capsuleID
       }
-      console.log(imageData)
 
       firebase.database().ref('images/' + capsuleID).push().update(imageData)
     })
@@ -82,58 +81,13 @@ export default React.createClass({
               var tmpImages = this.state.images
               tmpImages[capsuleID] = url
               this.setState({images: tmpImages})
-              //console.log(url)
-            })
-              // we should have the URL here! console.log it to start
-
-              // then - something like:
-              // currentCapsules[capsuleID].imgURL = url
-
-
-
-            // Now we can go to firebase.storagePath
-
-            //   firebase.database().ref("images/" + capsuleID).once("value").then((snapshot)=> {
-            //     const currentImgId = snapshot.val()
-            //     // console.log(currentImgId)
-            //
-            //     Object.keys(currentImgId).map((imageRef, i)=> {
-            //       firebase.database().ref("images/" + capsuleID + currentImgId).once("value").then((snapshot)=>{
-            //         const currentImage = snapshot.val()
-            //         // console.log(currentImage)
-            //     })
-            //   })
-            // })
-
-          })
-          // map through currentCapsuleImages
-          // imgSrc = image.storagePath
-        })
-        // You could do:
-        // var images = {} - before loop
-        // images[capsuleID] = url - inside loop when you have URL
-        // this.setState({images: images}) - after loop
-
-        // .once("value").then...
-        //   that will give you each image
-        //   then you can go to firebase.storage().ref(<path to image>)
-
-
-
-      // Get images for that capsule from firebase database
-      //   2) fire.basebase().ref()
-      // })
-      // 3) firebase.storage().ref(<path>) to get the image, and then get the download URL (.download_url - check docs)
-      //   cap.imgURL = <download url from fb storage ref()>
-
-    })
-  })
-
-//  console.log("IMAGES", Object.keys(images))
-
+           })
+         })
+       })
+     })
+   })
   },
   render() {
-    console.log("RENDER", this.state.capsules)
     return (
       <section className="capsule__Container">
         {
@@ -161,6 +115,20 @@ export default React.createClass({
            )
          })
         }
+      <section>
+        {
+          Object.keys(this.state.images).map((image, i)=> {
+            console.log(image)
+            return (
+              <section>
+                <article>
+
+                </article>
+              </section>
+            )
+          })
+        }
+      </section>
       </section>
     )
   }

@@ -5,6 +5,7 @@ import Capsule from './Capsule'
 import Landing from './Landing'
 import Home from './Home'
 import Capsule_List from './Capsule_List'
+import Modal from './Modal'
 
 render(
   (
