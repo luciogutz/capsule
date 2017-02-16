@@ -152,15 +152,21 @@
   overflow-y: hidden;
   white-space: nowrap;
 }
+
+.loadedImage {
+  height: 275px;
+    width: 350px;
+    margin-left: -2px;
+    margin-right: auto;
+}
 /* End of header elements including title */
 
-/*.aside__Wrapper {
-  width: 300px;
-  height: auto;
-  border-right: solid black 1px;
-  border-bottom: solid black 1px;
-  float: left;
-}*/
+.aside__Wrapper {
+  display: inline-block;
+  width: 30%;
+  vertical-align: text-bottom;
+  text-align: center;
+}
 
 .newCapsule {
   border-radius: 8px;
@@ -172,7 +178,7 @@
   height: 50px;
   vertical-align: middle;
   padding: 8px;
-  display: block;
+  display: inline-block;
 }
 
 .newCapsuleForm {

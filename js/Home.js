@@ -80,6 +80,7 @@ export default React.createClass({
     this.refs.newCapsule.className = "newCapsuleForm"
   },
   onCancelSubmit(e) {
+    e.preventDefault()
       this.refs.newCapsule.className = "hidden"
     },
   componentWillMount() {
@@ -106,6 +107,36 @@ export default React.createClass({
             <img
                className="logo__Image"
                src="https://github.com/luciogutz/capsule/blob/master/photos/Screen%20Shot%202017-02-11%20at%2011.55.48%20PM.png?raw=true" />
+             <aside className="aside__Wrapper">
+                 <button onClick={this.onCreateNewCapsule} className="newCapsule"> + new cAPPsule </button>
+                 <form onChange={this.onFormChange}ref="newCapsule" className="hidden">
+                   <input
+                     ref="capsuleName"
+                     className="inputs"
+                     type="text"
+                     placeholder="Who is this capsule for?"/>
+                   <input
+                     ref="capsuleEvent"
+                     className="inputs"
+                     type="text"
+                     placeholder="event"/>
+                   <input
+                     ref="capsuleDate"
+                     className="inputs"
+                     type="date"/>
+                   <button
+                     onClick={this.onNewCapsuleSubmit}
+                     ref="newCapsuleInfo"
+                     className="formSubmit">
+                     Submit
+                   </button>
+                   <button
+                     onClick={this.onCancelSubmit}
+                     className="formSubmit">
+                     Cancel
+                   </button>
+                 </form>
+               </aside>
             <div className="header__Right">
               <img className="header__UserImage" src={this.state.userPicture}/>
               <p className="header__UserName"> {this.state.userName} </p>
@@ -116,36 +147,6 @@ export default React.createClass({
         <section className="capsule__display">
           <Capsule_List userID={this.props.params.userID}/>
         </section>
-        <aside className="aside__Wrapper">
-          <button onClick={this.onCreateNewCapsule} className="newCapsule"> + new cAPPsule </button>
-          <form onChange={this.onFormChange}ref="newCapsule" className="hidden">
-            <input
-              ref="capsuleName"
-              className="inputs"
-              type="text"
-              placeholder="Who is this capsule for?"/>
-            <input
-              ref="capsuleEvent"
-              className="inputs"
-              type="text"
-              placeholder="event"/>
-            <input
-              ref="capsuleDate"
-              className="inputs"
-              type="date"/>
-            <button
-              onClick={this.onNewCapsuleSubmit}
-              ref="newCapsuleInfo"
-              className="formSubmit">
-              Submit
-            </button>
-            <button
-              onClick={this.onCancelSubmit}
-              className="formSubmit">
-              Cancel
-            </button>
-          </form>
-        </aside>
           <div ref="cameraContainer" className="cameraScreen">
             <button className="snap" ref="snap" onClick={this.onPhotoSnap}>Snap</button>
             <video ref="video" className="video" width="90%" height="auto"></video>

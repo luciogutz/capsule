@@ -12,9 +12,9 @@ export default React.createClass({
   },
   getInitialState() {
     return {
-      capsules: [],
-      images: [],
-      capsuleArray: []
+      capsules: {},
+      images: {} // keys: capsuleID, values: imageURL
+//      capsuleArray: []
     }
   },
   onDrop(e) {
@@ -59,36 +59,66 @@ export default React.createClass({
     else {
       userID = component.props.userID
     }
+
     firebase.database().ref("/capsules/" + userID).once("value").then((snapshot) => {
       const currentCapsules = snapshot.val()
       var parent = this
 
-      Object.keys(currentCapsules).map((capsuleID, i)=> {
-        firebase.database().ref("images/" + capsuleID).once("value").then((snapshot)=> {
-          const currentCapsuleImages = snapshot.val()
+      this.setState({capsules: currentCapsules})
 
+      Object.keys(currentCapsules).map((capsuleID, i)=> {
+
+        firebase.database().ref("images/" + capsuleID).once("value").then((snapshot)=> {
+          var currentCapsuleImages = snapshot.val()
+          currentCapsuleImages = currentCapsuleImages || {}
             // console.log(currentCapsuleImages)
+
           var imgSrc = ""
-          Object.keys(currentCapsuleImages).map((imgSrc, i)=> {
-              firebase.database().ref("images/" + capsuleID).once("value").then((snapshot)=> {
-                const currentImgSrc = snapshot.val()
-                console.log(currentImgSrc)
-              })
-            Object.keys(currentImgSrc).map((ImageRef, i)=> {
-              
+          Object.keys(currentCapsuleImages).map((imageId, i)=> {
+
+            var storagePath = currentCapsuleImages[imageId].storagePath
+            //console.log(currentCapsuleImages[imageId].storagePath)
+            firebase.storage().ref(storagePath).getDownloadURL().then((url) => {
+              var tmpImages = this.state.images
+              tmpImages[capsuleID] = url
+              this.setState({images: tmpImages})
+              //console.log(url)
             })
+              // we should have the URL here! console.log it to start
+
+              // then - something like:
+              // currentCapsules[capsuleID].imgURL = url
+
+
+
+            // Now we can go to firebase.storagePath
+
+            //   firebase.database().ref("images/" + capsuleID).once("value").then((snapshot)=> {
+            //     const currentImgId = snapshot.val()
+            //     // console.log(currentImgId)
+            //
+            //     Object.keys(currentImgId).map((imageRef, i)=> {
+            //       firebase.database().ref("images/" + capsuleID + currentImgId).once("value").then((snapshot)=>{
+            //         const currentImage = snapshot.val()
+            //         // console.log(currentImage)
+            //     })
+            //   })
+            // })
 
           })
           // map through currentCapsuleImages
           // imgSrc = image.storagePath
         })
+        // You could do:
+        // var images = {} - before loop
+        // images[capsuleID] = url - inside loop when you have URL
+        // this.setState({images: images}) - after loop
+
         // .once("value").then...
         //   that will give you each image
         //   then you can go to firebase.storage().ref(<path to image>)
-        this.setState({
-          capsules: currentCapsules
-        })
-      })
+
+
 
       // Get images for that capsule from firebase database
       //   2) fire.basebase().ref()
@@ -97,10 +127,13 @@ export default React.createClass({
       //   cap.imgURL = <download url from fb storage ref()>
 
     })
+  })
 
+//  console.log("IMAGES", Object.keys(images))
 
   },
   render() {
+    console.log("RENDER", this.state.capsules)
     return (
       <section className="capsule__Container">
         {
@@ -116,8 +149,8 @@ export default React.createClass({
                 data-capsuleID = {i}
                 id={"capsuleImage" + i}
                 onDragOver={this.onDragOver}
-                onDrop={this.onDrop}> Add A Photo
-                <img src={this.state.capsules[i].imgURL}/>
+                onDrop={this.onDrop}>
+                <img className="loadedImage" src={this.state.images[i]}/>
               </div>
               <article className="capsule__Info">
                 <h2 className="newCapTitle">{this.state.capsules[i].capsuleName}</h2>
