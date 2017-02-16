@@ -80,6 +80,7 @@ export default React.createClass({
             firebase.storage().ref(storagePath).getDownloadURL().then((url) => {
               var tmpImages = this.state.images
               tmpImages[capsuleID] = url
+              console.log(tmpImages)
               this.setState({images: tmpImages})
            })
          })
@@ -120,7 +121,10 @@ export default React.createClass({
           Object.keys(this.state.images).map((image, i)=> {
             console.log(image)
             return (
-              <section>
+              <section key={i}>
+                <div>
+                  {image.url}
+                </div>
                 <article>
 
                 </article>

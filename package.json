@@ -29,6 +29,6 @@
     "webpack": "^1.14.0"
   },
   "devDependencies": {
-    "firebase": "^3.6.8"
+
   }
 }
