@@ -14,8 +14,9 @@ export default React.createClass({
   getInitialState() {
     return {
       capsules: {},
-      images: {} // keys: capsuleID, values: imageURL
-//      capsuleArray: []
+      images: {},
+      currentImages: [] // keys: capsuleID, values: imageURL
+//    capsuleArray: []
     }
   },
   onDrop(e) {
@@ -80,10 +81,31 @@ export default React.createClass({
             firebase.storage().ref(storagePath).getDownloadURL().then((url) => {
               var tmpImages = this.state.images
               tmpImages[capsuleID] = url
-              console.log(tmpImages)
               this.setState({images: tmpImages})
            })
          })
+       })
+     })
+   })
+  },
+  onCapsuleClick(e) {
+    this.setState({
+      currentImages: []
+    })
+    var capsuleID = e.currentTarget.dataset.capsuleid
+    firebase.database().ref("images/" + capsuleID).once("value").then((snapshot)=> {
+      var currentCapsuleImages = snapshot.val()
+      currentCapsuleImages = currentCapsuleImages || {}
+      console.log(currentCapsuleImages)
+
+      Object.keys(currentCapsuleImages).map((imageId, i)=> {
+        var storagePath = currentCapsuleImages[imageId].storagePath
+        console.log("!!!!", storagePath)
+        firebase.storage().ref(storagePath).getDownloadURL().then((url) => {
+          var Images = this.state.currentImages
+          Images.push(url)
+          //tmpImages[capsuleID] = url
+          this.setState({currentImages: Images})
        })
      })
    })
@@ -99,7 +121,7 @@ export default React.createClass({
               className="capsule__Unit">
               <div
 
-                onClick={this.showImages}
+                onClick={this.onCapsuleClick}
                 className="capsule__default--Image"
                 data-capsuleID = {i}
                 id={"capsuleImage" + i}
@@ -116,18 +138,14 @@ export default React.createClass({
            )
          })
         }
-      <section>
+      <section className="modalWrapper">
         {
-          Object.keys(this.state.images).map((image, i)=> {
-            console.log(image)
+          this.state.currentImages.map((image, i)=>
+          {
             return (
               <section key={i}>
-                <div>
-                  {image.url}
+                <div className="imageModal"><img className= "imageModalThumbnail" src={image}/>
                 </div>
-                <article>
-
-                </article>
               </section>
             )
           })

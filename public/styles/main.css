@@ -325,3 +325,22 @@
   width: 200px;
   border-radius: 100px;
 }
+
+/* styling for modal popup */
+
+.imageModal {
+  height: 400px;
+  width: 500px;
+}
+
+.imageModalThumbnail {
+  height: 100px;
+  width: 125px;
+}
+
+.modalWrapper {
+  position: absolute;
+  z-index: 4;
+  height: 200px;
+  width: 20%;
+}
