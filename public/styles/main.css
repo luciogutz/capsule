@@ -6,6 +6,10 @@
    background-color: rgb(78, 122, 153);
  }
 
+ .blur {
+   -webkit-filter: blur(5px) grayscale(50%);
+ }
+
 /* All styles for landing page sign in*/
 /*.capsule {
   font-size: 82px;
@@ -282,7 +286,7 @@
   width: 50px;
   border-radius: 100px;
   position: absolute;
-  z-index: 4;
+  z-index: 1;
   margin-left: 40%;
   margin-top: 55%;
   background-color: red;
@@ -329,18 +333,62 @@
 /* styling for modal popup */
 
 .imageModal {
-  height: 400px;
-  width: 500px;
+  height: auto;
+  width: 100%;
 }
 
 .imageModalThumbnail {
-  height: 100px;
-  width: 125px;
+  height: 525px;
+  width: 650px;
+  display: inline-block;
+  padding: 15px;
+  z-index: 2
 }
 
 .modalWrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
   position: absolute;
-  z-index: 4;
-  height: 200px;
-  width: 20%;
+  z-index: 2;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 2%;
+  border: solid white 1px;
+  height: auto;
+  background-color: rgba(33, 33, 33,0.9)
+}
+
+.hidden {
+  display: none;
+}
+
+.eachImageContainer {
+  display: inline-block;
+  margin-top: 1%;
+}
+
+.close__Modal--Button {
+  display: block;
+  margin-left: 15%;
+  margin-top: 2%;
+  border-radius: 100px;
+  height: 40px;
+  width: 40px;
+  font-size: 20px;
+  background-color: darkgrey;
+  color: white;
+}
+
+.modal__Closing--Div {
+
+}
+
+.outside__Modal--Area {
+  width: 100%;
+  height: 800px;
+  background-color: rgba(33, 33, 33,0.9);
+  z-index: 2;
+  position: absolute;
+  margin-top: -7%;
 }

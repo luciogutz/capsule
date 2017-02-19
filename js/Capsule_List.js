@@ -89,6 +89,7 @@ export default React.createClass({
    })
   },
   onCapsuleClick(e) {
+    this.refs.modal.className = "outside__Modal--Area"
     this.setState({
       currentImages: []
     })
@@ -100,7 +101,6 @@ export default React.createClass({
 
       Object.keys(currentCapsuleImages).map((imageId, i)=> {
         var storagePath = currentCapsuleImages[imageId].storagePath
-        console.log("!!!!", storagePath)
         firebase.storage().ref(storagePath).getDownloadURL().then((url) => {
           var Images = this.state.currentImages
           Images.push(url)
@@ -109,6 +109,9 @@ export default React.createClass({
        })
      })
    })
+  },
+  onModalClose() {
+    this.refs.modal.className = "hidden"
   },
   render() {
     return (
@@ -120,7 +123,6 @@ export default React.createClass({
             <section key={i}
               className="capsule__Unit">
               <div
-
                 onClick={this.onCapsuleClick}
                 className="capsule__default--Image"
                 data-capsuleID = {i}
@@ -138,18 +140,23 @@ export default React.createClass({
            )
          })
         }
-      <section className="modalWrapper">
+      <section ref="modal" className="hidden">
+        <div className="modal__Closing--Div">
+            <button placeholder="X" className="close__Modal--Button" onClick={this.onModalClose}>X</button>
+        </div>
+        <section className="modalWrapper">
         {
           this.state.currentImages.map((image, i)=>
           {
             return (
-              <section key={i}>
+              <section className="eachImageContainer" key={i}>
                 <div className="imageModal"><img className= "imageModalThumbnail" src={image}/>
                 </div>
               </section>
             )
           })
         }
+        </section>
       </section>
       </section>
     )
