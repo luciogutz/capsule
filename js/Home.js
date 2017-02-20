@@ -40,6 +40,7 @@ export default React.createClass({
     var context = canvas.getContext('2d')
     context.drawImage(video, 0, 0, 640, 480, 0, 0, 700, 575)
     photo.setAttribute('src', canvas.toDataURL("image/png"))
+    this.refs.video.className = "hidden"
 
   },
   getInitialState() {
@@ -151,6 +152,10 @@ export default React.createClass({
             <button className="snap" ref="snap" onClick={this.onPhotoSnap}>Snap</button>
             <video ref="video" className="video" width="90%" height="auto"></video>
             <canvas className="canvas" ref="canvas" width="700" height="575"></canvas>
+          <div>
+            <h3 className="dragNdrop"> Drag n Drop </h3>
+            <button className="retake"> Retake </button>
+          </div>
             <img
               ref="userImage"
               id="drag1"

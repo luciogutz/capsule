@@ -274,7 +274,25 @@
 
 .photoSnap {
   width: 90%;
-  height: auto;
+  height: 780px;
+}
+
+.dragNdrop {
+  display: inline-block;
+  margin-left: 20%;
+  font-size: 28px;
+  font-family: helvetica;
+}
+
+.retake {
+  float: right;
+  margin-right: 31%;
+  margin-top: 1%;
+  font-size: 28px;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  font-family: helvetica;
 }
 
 .snap:hover {

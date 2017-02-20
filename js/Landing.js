@@ -12,9 +12,8 @@ export default React.createClass({
   },
 
   componentDidMount() {
-   this.setState({provider: new firebase.auth.GoogleAuthProvider()});
 
-   firebase.auth().onAuthStateChanged((authUser) => {
+   fbOnAuthStateChanged((authUser) => {
      if(authUser) {
        window.location = '#/home/:userID' //After successful login, user will be redirected to home.
       }
@@ -28,9 +27,9 @@ export default React.createClass({
           lastLogin: today
         }
 
-     firebase.database().ref().update(currentUser)
+     fbUpdateUser(currentUser)
 
-     firebase.database().ref("/users/" + authUser.uid).once("value").then((snapshot) => {
+     fbWhenUserUpdated(authUser.uid, (snapshot)=> {
        var snapshotReturn = snapshot.val()
        console.log("UID" + authUser.uid)
        this.setState({

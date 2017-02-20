@@ -1,6 +1,7 @@
 const provider = new firebase.auth.GoogleAuthProvider()
 
 
+
 export function fbOnAuthStateChanged(cb) {
   return firebase.auth().onAuthStateChanged(cb)
 }

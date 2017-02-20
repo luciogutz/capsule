@@ -2,6 +2,7 @@ import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 import Landing from '../js/Landing'
 
+jest.mock('../js/fbAuth')
 
 describe("Should have a sign in button", ()=>{
   let landingComponent = {}
@@ -13,11 +14,8 @@ describe("Should have a sign in button", ()=>{
   })
 
   it("should have a sign in button", ()=>{
-    const signInButton = TestUtils.scryRenderedDOMComponentsWithClass(
-      landingComponent,
-      "googleSignIn"
+    const signInButton = TestUtils.isElement("button"
     )
     expect(signInButton).toBeDefined()
    })
   })
-})
