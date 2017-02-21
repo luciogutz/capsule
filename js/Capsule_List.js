@@ -121,7 +121,7 @@ export default React.createClass({
           {
           return(
             <section key={i}
-              className="capsule__Unit">
+              className="capsule__Unit hvr-grow">
               <div
                 onClick={this.onCapsuleClick}
                 className="capsule__default--Image"

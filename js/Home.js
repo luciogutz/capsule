@@ -14,6 +14,8 @@ export default React.createClass({
   componentDidMount() {
     this.refs.cameraContainer.className = "cameraScreen"
     this.refs.snap.className = "snap"
+    this.refs.photoModal.className = "hidden"
+
     var video = this.refs.video
     var photo = this.refs.photo
 
@@ -40,8 +42,10 @@ export default React.createClass({
     var context = canvas.getContext('2d')
     context.drawImage(video, 0, 0, 640, 480, 0, 0, 700, 575)
     photo.setAttribute('src', canvas.toDataURL("image/png"))
-    this.refs.video.className = "hidden"
-
+    this.refs.photoModal.className = "photoModal"
+  },
+  onRetakeSubmit() {
+    this.refs.photoModal.className = "hidden"
   },
   getInitialState() {
     return {
@@ -152,18 +156,21 @@ export default React.createClass({
             <button className="snap" ref="snap" onClick={this.onPhotoSnap}>Snap</button>
             <video ref="video" className="video" width="90%" height="auto"></video>
             <canvas className="canvas" ref="canvas" width="700" height="575"></canvas>
-          <div>
-            <h3 className="dragNdrop"> Drag n Drop </h3>
-            <button className="retake"> Retake </button>
           </div>
-            <img
-              ref="userImage"
-              id="drag1"
-              draggable="true"
-              onDragStart={this.props.onDragStart}
-              className="photoSnap" ref="photo"/>
-          </div>
-          <section ref="capsuleArea" className="newCapsules__Container">
+          <section ref="photoModal" className="photoModal">
+            <article className="photoDisplay">
+            <div>
+              <h3 ref="dragNdrop" className="dragNdrop"> Just Drag n Drop </h3>
+              <p className="or"> OR </p>
+              <button onClick={this.onRetakeSubmit} ref="retake" className="retake"> Retake Pic </button>
+            </div>
+              <img
+                id="drag1"
+                draggable="true"
+                onDragStart={this.props.onDragStart}
+                className="photoSnap"
+                ref="photo"/>
+            </article>
           </section>
       </section>
     )

@@ -254,6 +254,21 @@
   border: solid rgb(247, 138, 126) 2px;
 }
 
+.hvr-grow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
 
 .lines {
   margin-top: 20%;
@@ -273,26 +288,52 @@
 }
 
 .photoSnap {
-  width: 90%;
-  height: 780px;
+  width: 76%;
+  height: 600px;
+  margin-left: 23%;
+}
+
+.photoModal {
+  z-index: 5;
+  width: 100%;
+  height: 800px;
+  background-color: rgba(33, 33, 33,0.9);
+  margin-top: -62%;
+  position: absolute;
+}
+
+.photoDisplay {
+  width: 82%;
+  height: auto;
+  margin-left: 0.5%;
 }
 
 .dragNdrop {
   display: inline-block;
-  margin-left: 20%;
+  margin-left: 34%;
   font-size: 28px;
   font-family: helvetica;
+  color: rgb(94, 226, 191);
+}
+
+.or {
+  display: inline-block;
+  font-size: 24px;
+  color: white;
+  margin-left: 5%;
 }
 
 .retake {
   float: right;
-  margin-right: 31%;
-  margin-top: 1%;
+  margin-right: 15%;
+  margin-top: 2.5%;
   font-size: 28px;
   -webkit-appearance: none;
   background: none;
   border: none;
   font-family: helvetica;
+  color: rgb(247, 138, 126);
+  border: solid 3px rgb(94, 226, 191);
 }
 
 .snap:hover {
