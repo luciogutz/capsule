@@ -145,12 +145,12 @@ export default React.createClass({
                    <button
                      onClick={this.onNewCapsuleSubmit}
                      ref="newCapsuleInfo"
-                     className="formSubmit">
+                     className="formSubmit hvr-border-fade">
                      Submit
                    </button>
                    <button
                      onClick={this.onCancelSubmit}
-                     className="formSubmit">
+                     className="formSubmit hvr-border-fade">
                      Cancel
                    </button>
                  </form>
@@ -160,7 +160,7 @@ export default React.createClass({
             <div className="header__Right">
               <img className="header__UserImage" src={this.state.userPicture}/>
               <p className="header__UserName"> {this.state.userName} </p>
-              <button className="signOut" onClick={this.props.signUserOutFunc}> Sign Out </button>
+              <button className="signOut hvr-grow" onClick={this.props.signUserOutFunc}> Sign Out </button>
             </div>
         </header>
 
