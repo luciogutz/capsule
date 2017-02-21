@@ -83,7 +83,7 @@
 
 .header {
   height: 100px;
-  margin: 0 0 3% 0;
+  margin: 0 0 1% 0;
 }
 
 .header__Div {
@@ -150,7 +150,7 @@
 }
 
 .capsule__Container {
-  height: 400px;
+  height: 430px;
   width: 100%;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -250,6 +250,7 @@
   margin-bottom: 8%;
   margin-left: 2%;
   margin-right: 2%;
+  margin-top: 2%;
   display: inline-block;
   border: solid rgb(247, 138, 126) 2px;
 }
