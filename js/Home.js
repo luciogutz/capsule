@@ -81,6 +81,19 @@ export default React.createClass({
     this.refs.capsuleEvent.value = ""
     this.refs.capsuleDate.value = ""
   },
+  onUploadPhotoChange(e) {
+    var fileUpload = e.target
+    var files = fileUpload.files
+    var fr = new FileReader()
+    var comp = this
+    fr.onload = function () {
+      comp.refs.photo.src = fr.result
+    }
+    fr.readAsDataURL(files[0])
+
+    this.refs.photoModal.className = "photoModal"
+    this.refs.uploadPhoto.value = ""
+  },
   onCreateNewCapsule(){
     this.refs.newCapsule.className = "newCapsuleForm"
   },
@@ -142,6 +155,8 @@ export default React.createClass({
                    </button>
                  </form>
                </aside>
+            <div className="upload__Div"> Upload your own photo </div>
+            <input onChange={this.onUploadPhotoChange} ref="uploadPhoto" className="upload__Photo" type="file" placeholder="upload your photo"/>
             <div className="header__Right">
               <img className="header__UserImage" src={this.state.userPicture}/>
               <p className="header__UserName"> {this.state.userName} </p>
@@ -159,16 +174,17 @@ export default React.createClass({
           </div>
           <section ref="photoModal" className="photoModal">
             <article className="photoDisplay">
-            <div>
+            <div className="ImageSnapDiv">
               <h3 ref="dragNdrop" className="dragNdrop"> Just Drag n Drop </h3>
               <p className="or"> OR </p>
               <button onClick={this.onRetakeSubmit} ref="retake" className="retake"> Retake Pic </button>
+              <button onClick={this.onRetakeSubmit} className="close__Image--snap">X</button>
             </div>
               <img
                 id="drag1"
                 draggable="true"
                 onDragStart={this.props.onDragStart}
-                className="photoSnap"
+                className="photoSnap hvr-grow"
                 ref="photo"/>
             </article>
           </section>
