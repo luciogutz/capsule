@@ -130,17 +130,17 @@ export default React.createClass({
                  <form onChange={this.onFormChange}ref="newCapsule" className="hidden">
                    <input
                      ref="capsuleName"
-                     className="inputs"
+                     className="inputs hvr-border-fade"
                      type="text"
                      placeholder="Who is this capsule for?"/>
                    <input
                      ref="capsuleEvent"
-                     className="inputs"
+                     className="inputs hvr-border-fade"
                      type="text"
                      placeholder="event"/>
                    <input
                      ref="capsuleDate"
-                     className="inputs"
+                     className="inputs hvr-border-fade"
                      type="date"/>
                    <button
                      onClick={this.onNewCapsuleSubmit}
@@ -174,11 +174,11 @@ export default React.createClass({
           </div>
           <section ref="photoModal" className="photoModal">
             <article className="photoDisplay">
-            <div className="ImageSnapDiv">
+            <div className="imageSnapDiv">
               <h3 ref="dragNdrop" className="dragNdrop"> Just Drag n Drop </h3>
               <p className="or"> OR </p>
-              <button onClick={this.onRetakeSubmit} ref="retake" className="retake"> Retake Pic </button>
-              <button onClick={this.onRetakeSubmit} className="close__Image--snap">X</button>
+              <button onClick={this.onRetakeSubmit} ref="retake" className="retake hvr-grow"> Retake Pic </button>
+              <button onClick={this.onRetakeSubmit} className="close__Image--snap hvr-border-fade">X</button>
             </div>
               <img
                 id="drag1"

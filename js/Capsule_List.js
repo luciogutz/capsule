@@ -142,7 +142,7 @@ export default React.createClass({
         }
       <section ref="modal" className="hidden">
         <div className="modal__Closing--Div">
-            <button placeholder="X" className="close__Modal--Button" onClick={this.onModalClose}>X</button>
+            <button placeholder="X" className="close__Modal--Button hvr-border-fade" onClick={this.onModalClose}>X</button>
         </div>
         <section className="modalWrapper">
         {
