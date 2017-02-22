@@ -80,6 +80,7 @@ export default React.createClass({
     this.refs.capsuleName.value = ""
     this.refs.capsuleEvent.value = ""
     this.refs.capsuleDate.value = ""
+    window.location.reload()
   },
   onUploadPhotoChange(e) {
     var fileUpload = e.target

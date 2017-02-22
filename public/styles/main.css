@@ -157,7 +157,7 @@
 }
 
 .signOut {
- margin-left: 20px;
+ margin-left: 6%;
  border: none;
  background-color: rgb(78, 122, 153);
  color: rgb(247, 138, 126);
@@ -470,11 +470,13 @@
   height: 100px;
   background-color: white;
   text-align: left;
+  width: 352px;
+  margin-left: 2.3%;
 }
 
 .capsule__default--Image {
   height: 275px;
-  width: 350px;
+  width: 370px;
   margin: auto;
 }
 
@@ -493,7 +495,7 @@
 
 .imageModalThumbnail {
   height: 525px;
-  width: 650px;
+  width: 690px;
   display: inline-block;
   padding: 15px;
   z-index: 2
