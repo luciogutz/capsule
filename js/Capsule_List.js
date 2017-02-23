@@ -30,7 +30,7 @@ export default React.createClass({
       e.currentTarget.removeChild(e.currentTarget.firstChild)
     }
     e.currentTarget.appendChild(newImageElement)
-    newImageElement.className = "capsule__default--Image"
+    newImageElement.className = "loadedImage"
     e.dataTransfer.clearData()
 
     var uniqueImageID = new Date().getTime() + Math.random();
