@@ -189,7 +189,7 @@
 .loadedImage {
   height: 275px;
     width: 352px;
-    margin-left: -1px;
+    margin-left: -2px;
     margin-right: auto;
     border-radius: 8px 8px 0 0;
 }
