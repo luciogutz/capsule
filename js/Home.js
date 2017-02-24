@@ -72,15 +72,13 @@ export default React.createClass({
     })
   },
   onNewCapsuleSubmit(e) {
-    // e.preventDefault()
-    // sending data to firebase
+    window.location.reload()
     var capsule = this.state.capsuleData
     firebase.database().ref("/capsules/" + this.props.params.userID ).push().update(capsule)
     this.refs.newCapsule.className = "hidden"
     this.refs.capsuleName.value = ""
     this.refs.capsuleEvent.value = ""
     this.refs.capsuleDate.value = ""
-    window.location.reload()
   },
   onUploadPhotoChange(e) {
     var fileUpload = e.target
