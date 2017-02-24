@@ -125,7 +125,7 @@ export default React.createClass({
                className="logo__Image"
                src="https://github.com/luciogutz/capsule/blob/master/photos/Screen%20Shot%202017-02-11%20at%2011.55.48%20PM.png?raw=true" />
              <aside className="aside__Wrapper">
-                 <button onClick={this.onCreateNewCapsule} className="newCapsule"> + new cAPPsule </button>
+                 <button onClick={this.onCreateNewCapsule} className="newCapsule"> + new cAPPsul </button>
                  <form onChange={this.onFormChange}ref="newCapsule" className="hidden">
                    <input
                      ref="capsuleName"
